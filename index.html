@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Muallimi soniy — Harflar va Tajvid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--s:1;--bg:#fbf7ef;--fg:#1d2a24;--card:#fff;--acc:#0f6b4f;--acc2:#b8860b;--warn:#b3261e;--line:#e4dccb;--soft:#f1ebdc;--tipbg:#e8f4ee;--notebg:#fdecea;
+--arf:'Amiri','Noto Naskh Arabic','Scheherazade New','Traditional Arabic','Geeza Pro','Arial',serif}
+html.dark{--bg:#14201b;--fg:#eef3ee;--card:#1d2d26;--acc:#2a9d74;--acc2:#e0b84a;--warn:#ff8a80;--line:#32483e;--soft:#243a31;--tipbg:#1b3a2d;--notebg:#3b2423}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,'Segoe UI',Roboto,Arial,sans-serif;background:var(--bg);color:var(--fg);font-size:calc(1.15rem*var(--s));line-height:1.55}
+header{position:sticky;top:0;z-index:30;background:var(--acc);color:#fff;display:flex;gap:.5rem;align-items:center;padding:.45rem .8rem;flex-wrap:wrap}
+header h1{font-size:1.15rem;margin:0;flex:1;min-width:150px}
+header button,header input{font-size:1rem;border:0;border-radius:10px;padding:.45rem .8rem;cursor:pointer}
+header button{background:rgba(255,255,255,.2);color:#fff}
+header button:hover{background:rgba(255,255,255,.35)}
+header input{background:#fff;color:#222;cursor:text;width:140px}
+#side{position:fixed;left:0;top:56px;bottom:0;width:300px;overflow:auto;background:var(--card);border-right:1px solid var(--line);padding:.6rem;z-index:20;font-size:1rem}
+#side h4{margin:.9rem .3rem .3rem;color:var(--acc2);text-transform:uppercase;font-size:.8rem;letter-spacing:.06em}
+#side a{display:flex;gap:.5rem;align-items:center;padding:.4rem .6rem;border-radius:10px;color:var(--fg);text-decoration:none;cursor:pointer}
+#side a:hover{background:var(--soft)}
+#side a.on{background:var(--acc);color:#fff}
+#side a .ar{font-size:1.5rem;line-height:1.2;min-width:1.8rem;text-align:center}
+main{margin-left:300px;padding:1rem 1.6rem 5rem;max-width:1250px}
+@media(max-width:950px){#side{transform:translateX(-102%);transition:.2s;box-shadow:0 0 30px #0005}#side.open{transform:none}main{margin-left:0;padding:1rem}}
+.ar{font-family:var(--arf);direction:rtl;unicode-bidi:isolate;font-size:1.5em;line-height:1.9}
+h2{font-size:calc(2rem*var(--s));margin:.2rem 0 .3rem;color:var(--acc)}
+h3{font-size:calc(1.45rem*var(--s));margin:1.4rem 0 .4rem;color:var(--acc);border-bottom:2px solid var(--line);padding-bottom:.2rem}
+.sub{opacity:.75;margin:0 0 1rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1rem 1.3rem;margin:1rem 0}
+.tip,.note{border-radius:14px;padding:.7rem 1rem;margin:.9rem 0}
+.tip{background:var(--tipbg);border-left:6px solid var(--acc)}
+.note{background:var(--notebg);border-left:6px solid var(--warn)}
+.note::before{content:"ISTISNO: ";font-weight:800;color:var(--warn)}
+.tip::before{content:"ESLATMA: ";font-weight:800;color:var(--acc)}
+.hero{display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap}
+.hero .letter{font-size:calc(13rem*var(--s));line-height:1.25;color:var(--acc);min-width:calc(11rem*var(--s));text-align:center;font-family:var(--arf);direction:rtl}
+.hero .meta{flex:1;min-width:260px}
+.hero .meta .name{font-size:calc(2.2rem*var(--s));font-weight:800}
+.hero .meta .nm-ar{font-size:calc(3rem*var(--s))}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:.2rem .9rem;margin-top:.5rem}
+.kv b{color:var(--acc2)}
+.forms{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem}
+.forms div,.cell{border:2px solid var(--line);border-radius:14px;text-align:center;padding:.4rem .2rem;background:var(--card)}
+.forms .ar{display:block;font-size:calc(6rem*var(--s));line-height:1.5}
+.forms small,.cell small{display:block;opacity:.8;font-size:.85em}
+.hk{display:grid;grid-template-columns:repeat(auto-fill,minmax(calc(9rem*var(--s)),1fr));gap:.7rem}
+.cell .ar{display:block;font-size:calc(4.6rem*var(--s));line-height:1.6}
+.cell small{font-weight:700;color:var(--acc)}
+.exg{display:grid;grid-template-columns:repeat(auto-fill,minmax(calc(15rem*var(--s)),1fr));gap:.8rem}
+.exi{border:2px solid var(--line);border-radius:14px;padding:.5rem .6rem;text-align:center;background:var(--card)}
+.exi .ar{display:block;font-size:calc(3.6rem*var(--s));line-height:1.7}
+.exi small{display:block;opacity:.85}
+table{border-collapse:collapse;width:100%;margin:.6rem 0;background:var(--card)}
+th,td{border:1px solid var(--line);padding:.45rem .7rem;text-align:left;vertical-align:middle}
+th{background:var(--soft)}
+td .ar{font-size:calc(2.2rem*var(--s));line-height:1.6}
+.tw{overflow-x:auto}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:.5rem 0}
+.chip{background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:.3rem .9rem;cursor:pointer;text-decoration:none;color:var(--fg)}
+.chip:hover{background:var(--acc);color:#fff}
+.lg{display:grid;grid-template-columns:repeat(auto-fill,minmax(calc(8.5rem*var(--s)),1fr));gap:.7rem;direction:rtl}
+.lg a{direction:ltr;border:2px solid var(--line);border-radius:16px;background:var(--card);text-align:center;padding:.3rem;text-decoration:none;color:var(--fg);cursor:pointer}
+.lg a:hover{border-color:var(--acc);background:var(--tipbg)}
+.lg a .ar{display:block;font-size:calc(5rem*var(--s));line-height:1.5;color:var(--acc)}
+.lg a small{display:block;font-weight:700}
+.nav{display:flex;justify-content:space-between;gap:1rem;margin-top:2rem}
+.nav button{font-size:1.1rem;border:0;border-radius:12px;background:var(--acc);color:#fff;padding:.7rem 1.3rem;cursor:pointer}
+.nav button:disabled{opacity:.3;cursor:default}
+.fc{text-align:center;padding:1.5rem}
+.fc .ar{display:block;font-size:calc(16rem*var(--s));line-height:1.4;color:var(--acc)}
+.fc .ans{font-size:calc(2.4rem*var(--s));font-weight:800;min-height:3.5rem}
+.fc button{font-size:1.2rem;border:0;border-radius:12px;background:var(--acc);color:#fff;padding:.7rem 1.4rem;margin:.3rem;cursor:pointer}
+ul{padding-left:1.3rem}li{margin:.25rem 0}
+.sp{cursor:pointer}.sp:hover{background:var(--tipbg);border-radius:10px;outline:2px dashed var(--acc)}
+#brec.on{background:#c62828}.rec{outline:3px solid #c62828!important;animation:bl 1s infinite}.has::after{content:'●';color:var(--acc);font-size:.35em;vertical-align:top}@keyframes bl{50%{opacity:.4}}
+#bsp.on{background:var(--acc2)}
+
+.emo{font-size:calc(4rem*var(--s));line-height:1.2}
+.learn{font-size:1.1rem;border:0;border-radius:999px;background:var(--acc2);color:#fff;padding:.6rem 1.3rem;cursor:pointer;font-weight:700}
+.learn.done{background:#2e9e5b}
+.pbar{height:22px;border-radius:999px;background:var(--soft);overflow:hidden;border:2px solid var(--line)}
+.pbar i{display:block;height:100%;background:linear-gradient(90deg,#ffb300,#ff6b35);transition:width .4s}
+.gscore{font-size:1.2rem;margin:.4rem 0}
+.gq{text-align:center;margin:1rem 0}
+.gbig{display:block;font-size:calc(11rem*var(--s))!important;color:var(--acc);line-height:1.3}
+.gname{font-size:calc(5rem*var(--s));font-weight:800;color:var(--acc)}
+.gemo{font-size:calc(9rem*var(--s));line-height:1.2}
+.gch{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem}
+.gch button{font-size:calc(1.8rem*var(--s));border:3px solid var(--line);border-radius:20px;background:var(--card);color:var(--fg);padding:.6rem;cursor:pointer;font-weight:700}
+.gch button.ar{font-size:calc(5rem*var(--s));line-height:1.4}
+.gch button:hover{border-color:var(--acc);transform:scale(1.03)}
+.gch button.good{background:#c8f7d4;border-color:#2e9e5b;animation:pop .5s}
+.gch button.bad{background:#ffd5d0;border-color:#e53935;animation:shake .4s}
+.gmsg{text-align:center;font-size:calc(1.8rem*var(--s));min-height:2.6rem;font-weight:800;margin-top:.6rem}
+@keyframes pop{50%{transform:scale(1.15)}}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.cf{position:fixed;bottom:-40px;font-size:2.4rem;z-index:99;pointer-events:none;animation:fly 1.6s ease-out forwards}
+@keyframes fly{to{transform:translateY(-110vh) rotate(40deg);opacity:.2}}
+html.kid{--bg:#fff6dc;--fg:#2a2140;--card:#ffffff;--acc:#e8541f;--acc2:#7c4dff;--tipbg:#e3f7ff;--notebg:#ffe3e3;--warn:#c62828;--line:#ffd89b;--soft:#ffeccc}
+html.kid body{font-family:'Comic Sans MS','Trebuchet MS',system-ui,sans-serif}
+html.kid header{background:linear-gradient(90deg,#ff6b35,#ffb300,#7c4dff)}
+html.kid .card,html.kid .exi,html.kid .cell,html.kid .forms div{border-radius:26px;border-width:3px}
+html.kid .exi:nth-child(4n+1){background:#ffe3e3}html.kid .exi:nth-child(4n+2){background:#e3f3ff}html.kid .exi:nth-child(4n+3){background:#e6ffe3}html.kid .exi:nth-child(4n){background:#fff2cc}
+html.kid .lg a:nth-child(5n+1){background:#ffe3e3}html.kid .lg a:nth-child(5n+2){background:#e3f3ff}html.kid .lg a:nth-child(5n+3){background:#e6ffe3}html.kid .lg a:nth-child(5n+4){background:#fff2cc}html.kid .lg a:nth-child(5n){background:#f1e3ff}
+html.kid .lg a:hover{transform:rotate(-4deg) scale(1.08)}
+html.kid h3{border-bottom-style:dashed}
+.zg{display:grid;grid-template-columns:repeat(auto-fill,minmax(calc(10.5rem*var(--s)),1fr));gap:.7rem;direction:rtl}
+.zs{direction:ltr;border:3px dashed var(--line);border-radius:20px;text-align:center;padding:.4rem;background:var(--card);min-height:calc(10rem*var(--s))}
+.zs.on{border-style:solid;border-color:var(--acc);background:var(--tipbg)}
+.zs.new{animation:pop .7s}
+.zs .zl{display:block;font-size:calc(3rem*var(--s));line-height:1.4;color:var(--acc)}
+.zs .ze{font-size:calc(3.4rem*var(--s));line-height:1.2}
+.zs .zw{display:block;font-size:calc(2rem*var(--s))!important;line-height:1.5}
+.zs small{display:block}
+@media print{header,#side,.nav{display:none}main{margin:0}}
+</style>
+</head>
+<body>
+<header>
+<button id="bmenu" title="Menyu">☰</button>
+<h1>📖 Muallimi soniy — Harflar va Tajvid</h1>
+<input id="q" placeholder="Qidirish…" autocomplete="off">
+<button id="bm" title="Shriftni kichiklashtirish">A−</button>
+<button id="bp" title="Shriftni kattalashtirish">A+</button>
+<button id="brec" title="Yozish rejimi: o'z ovozingizni yozing">🎙 yozish: o'chiq</button>
+<button id="bsp" title="Ovoz: tez/sekin">🔊 sekin</button>
+<button id="bk" title="Bolalar rejimi">🎈</button>
+<button id="bd" title="Tungi rejim">🌙</button>
+</header>
+<nav id="side"></nav>
+<main id="main"></main>
+
+<script>
+/* ================= MA'LUMOTLAR ================= */
+const FATHA='َ',KASRA='ِ',DAMMA='ُ',FT='ً',KT='ٍ',DT='ٌ',SUK='ْ',SHD='ّ',ZWJ='‍';
+
+/* Harflar: c harf, n nomi, ar arabcha nomi, t lotincha tovush, conn=ulanadimi, mk makhraj, sf sifat */
+const L=[
+{c:'ا',n:'Alif',ar:'أَلِف',t:"'",conn:false,mk:"Jawf (og'iz-tomoq bo'shlig'i) — madd tovushi uchun. Hamza esa halqning eng tubidan chiqadi.",sf:"Madd harfi; jahr, rakhawa, istifal, infitah",
+ w:[['أَسَدٌ','sher'],['إِبِلٌ','tuya'],['أُذُنٌ','quloq']],
+ notes:["Alif <b>hech qachon harakat olmaydi</b> va so'z boshida kelmaydi. Harakatli alif — bu aslida <b>hamza</b> (أ، إ، أُ).","<b>Madd harfi:</b> fatha dan keyin sokin alif cho'ziq «o» beradi, 2 harakat: بَا، قَالَ، كِتَابٌ.","Faqat oldingi harfga ulanadi, keyingisiga <b>ulanmaydi</b>.","<b>Hamzat wasl</b> (ٱ): faqat so'z boshlanganda o'qiladi, so'z o'rtasida o'qilmaydi — «Vasl» bo'limiga qarang.","<b>Kichik alif</b> (ٰ): هَٰذَا، ذَٰلِكَ، ٱلرَّحْمَٰنِ — oddiy madd kabi cho'ziladi.","<b>Madd belgisi</b> ٓ: آ — hamza + alif, ya'ni «aa»."],
+ istisno:["Yozilgan, lekin <b>o'qilmaydigan alif</b>: jam' vovidan keyingi alif (قَالُوا۟ — dumaloq nol bilan belgilanadi).","أَنَا۠ so'zidagi alif <b>faqat to'xtaganda</b> (vaqfda) o'qiladi, vaslda o'qilmaydi.","لَٰكِنَّا۠ هُوَ ٱللَّهُ (Kahf 38) — ham shunday: alif faqat vaqfda o'qiladi."],
+ rel:['hamza','madd','wasl']},
+{c:'ب',n:'Ba',ar:'بَاء',t:'b',conn:true,mk:"Ikki lab (shafatayn) — labning nam qismi bir-biriga yopishadi.",sf:"Jahr, shidda, istifal, infitah, izlaq + qalqala",
+ w:[['بَابٌ','eshik'],['بَيْتٌ','uy'],['بَقَرَةٌ','sigir']],
+ notes:["<b>Qalqala harfi</b> (قطب جد): sokin bo'lganda «urib» o'qiladi: وَيَبْقَىٰ.","Nun sokin yoki tanvindan keyin kelsa — <b>iqlab</b>: مِنۢ بَعْدِ (nun → mim).","Mim sokindan keyin kelsa — <b>ikhfo shafawiy</b>: تَرْمِيهِم بِحِجَارَةٍ.","Ba bilan mim — <b>mutajanisayn</b> idg'omi: ٱرْكَب مَّعَنَا (Hud 42).","Lam qamariy harfi: ٱلْبَيْتُ."],
+ istisno:["ٱرْكَب مَّعَنَا da ba sokin bo'lsa ham <b>qalqala qilinmaydi</b> — mim ga singib ketadi (g'unna bilan)."],
+ rel:['qalqala','nun','mim','idgham']},
+{c:'ت',n:'Ta',ar:'تَاء',t:'t',conn:true,mk:"Til uchi + yuqori old tishlar ildizi.",sf:"Hams, shidda, istifal, infitah, ismat",
+ w:[['تُفَّاحٌ','olma'],['تَمْرٌ','xurmo'],['تَاجٌ','toj']],
+ notes:["Yupqa «t» — qalin ط bilan adashtirmang.","Nun sokin/tanvindan keyin — <b>ikhfo</b>: أَنتُمْ، جَنَّاتٍ تَجْرِي.","Lam shamsiy harfi: ٱلتِّينِ.","<b>Mutajanisayn</b>: قَد تَّبَيَّنَ (د→ت), وَدَّت طَّائِفَةٌ (ت→ط).","Ta marbuta (ة) alohida mavzu."],
+ istisno:["أَحَطتُ، بَسَطتَ da ط → ت ga <b>to'liq singmaydi</b> (idg'om naqis): ط ning qalinligi (itbaq) qoladi."],
+ rel:['nun','lam','idgham']},
+{c:'ث',n:'Sa',ar:'ثَاء',t:'s̱',conn:true,mk:"Til uchi + yuqori old tishlarning uchi (til tishlar orasidan sal chiqadi).",sf:"Hams, rakhawa, istifal, infitah, ismat",
+ w:[['ثَوْرٌ','buqa'],['ثَعْلَبٌ','tulki'],['ثَوْبٌ','kiyim']],
+ notes:["Ingliz tilidagi <i>think</i> dagi «th» kabi; o'zbekcha «s» emas, tishlar orasidan havo oqadi.","<b>Mutajanisayn</b>: يَلْهَث ذَّٰلِكَ (ث→ذ).","Nun sokindan keyin <b>ikhfo</b>: مَنثُورًا.","Lam shamsiy: ٱلثَّمَرَاتِ."],
+ istisno:[],rel:['nun','idgham','lam']},
+{c:'ج',n:'Jim',ar:'جِيم',t:'j',conn:true,mk:"Til o'rtasi + qattiq tanglay (jim, shin, ya — bir joy).",sf:"Jahr, shidda, istifal, infitah, ismat + qalqala",
+ w:[['جَمَلٌ','tuya'],['جَبَلٌ','tog\''],['جَنَّةٌ','jannat']],
+ notes:["«dj» kabi (jon), «zh» emas.","<b>Qalqala harfi</b>: sokin bo'lsa urib o'qiladi: يَجْعَلُونَ، ٱلْحَجُّ.","<b>Ikhfo</b>: أَنجَيْنَا.","Lam qamariy: ٱلْجَنَّةُ."],
+ istisno:[],rel:['qalqala','nun','lam']},
+{c:'ح',n:'Ḥa',ar:'حَاء',t:'ḥ',conn:true,mk:"Halqning o'rta qismi (awsat halq).",sf:"Hams, rakhawa, istifal, infitah, ismat",
+ w:[['حِصَانٌ','ot'],['حَلِيبٌ','sut'],['حَجَرٌ','tosh']],
+ notes:["Tomoqning o'rtasidan, nafas bilan chiqadigan <b>siqiq «h»</b> — ه bilan almashtirmang.","<b>Izhor halqiy</b> harfi: nun sokin/tanvin keyin — aniq o'qiladi: مِنْ حَكِيمٍ.","Lam qamariy: ٱلْحَمْدُ."],
+ istisno:[],rel:['nun','lam','makhraj']},
+{c:'خ',n:'Xo',ar:'خَاء',t:'x',conn:true,mk:"Halqning yuqori qismi (adna halq, og'izga yaqin).",sf:"Hams, rakhawa, isti'lo (qalin), infitah, ismat",
+ w:[['خُبْزٌ','non'],['خَرُوفٌ','qo\'y'],['خَيْمَةٌ','chodir']],
+ notes:["<b>Isti'lo harfi</b> — qalin (tafxim) o'qiladi.","<b>Izhor halqiy</b>: مِنْ خَيْرٍ.","Lam qamariy: ٱلْخَيْرُ."],
+ istisno:[],rel:['tafxim','nun','lam']},
+{c:'د',n:'Dal',ar:'دَال',t:'d',conn:false,mk:"Til uchi + yuqori old tishlar ildizi.",sf:"Jahr, shidda, istifal, infitah, ismat + qalqala",
+ w:[['دَجَاجَةٌ','tovuq'],['دُبٌّ','ayiq'],['دَرْسٌ','dars']],
+ notes:["<b>Qalqala harfi</b>: يَدْخُلُونَ، أَحَدٌ (vaqfda kuchliroq).","<b>Ulanmaydi</b> (keyingi harfga).","<b>Mutajanisayn</b>: قَد تَّبَيَّنَ (د→ت), أَثْقَلَت دَّعَوَا (ت→د).","Nun sokindan keyin <b>ikhfo</b>: أَندَادًا. Lam shamsiy: ٱلدِّينِ."],
+ istisno:["قَد تَّبَيَّنَ da dal ga qalqala <b>berilmaydi</b> — idg'om bor."],
+ rel:['qalqala','idgham','nun','lam']},
+{c:'ذ',n:'Zal',ar:'ذَال',t:'ḏ',conn:false,mk:"Til uchi + yuqori old tishlarning uchi.",sf:"Jahr, rakhawa, istifal, infitah, ismat",
+ w:[['ذَهَبٌ','oltin'],['ذُرَةٌ','makkajo\'xori'],['ذِئْبٌ','bo\'ri']],
+ notes:["Ingliz <i>this</i> dagi «th» kabi — o'zbekcha «z» emas.","Ulanmaydi.","<b>Mutajanisayn</b>: إِذ ظَّلَمْتُمْ (ذ→ظ, Zuxruf 39).","<b>Ikhfo</b>: مَن ذَا ٱلَّذِي. Lam shamsiy: ٱلذِّكْرَىٰ."],
+ istisno:[],rel:['idgham','nun','lam']},
+{c:'ر',n:'Ro',ar:'رَاء',t:'r',conn:false,mk:"Til uchi (nun dan sal orqada) + yuqori tanglay.",sf:"Jahr, tawassut, istifal, infitah, izlaq + takrir (tafxim yoki tarqiq)",
+ w:[['رَجُلٌ','erkak'],['رُمَّانٌ','anor'],['رَأْسٌ','bosh']],
+ notes:["<b>Takrir</b> sifati bor, lekin tilni titratib yubormang!","<b>Tafxim va tarqiq</b> qoidalari alohida mavzuda (Ra).","Nun→ra: <b>idg'om bila g'unna</b>: مِنْ رَبِّهِمْ. Lam→ra: قُل رَّبِّ.","Ulanmaydi. Lam shamsiy: ٱلرَّحْمَٰنِ."],
+ istisno:["فِرْقٍ (Shuaro 63) — ra da <b>ikki vajh</b> joiz: tafxim ham, tarqiq ham."],
+ rel:['ra','nun','lam','idgham']},
+{c:'ز',n:'Za',ar:'زَاي',t:'z',conn:false,mk:"Til uchi + pastki old tishlar ustki qismi.",sf:"Jahr, rakhawa, istifal, infitah, ismat + safir (hushtak)",
+ w:[['زَهْرَةٌ','gul'],['زَيْتٌ','yog\''],['زُجَاجٌ','shisha']],
+ notes:["<b>Safir</b> — hushtaksimon tovush bilan «z».","Ulanmaydi.","<b>Ikhfo</b>: فَإِن زَلَلْتُم. Lam shamsiy: ٱلزَّكَوٰةَ."],
+ istisno:[],rel:['nun','lam']},
+{c:'س',n:'Sin',ar:'سِين',t:'s',conn:true,mk:"Til uchi + pastki old tishlar ustki qismi.",sf:"Hams, rakhawa, istifal, infitah, ismat + safir",
+ w:[['سَمَكٌ','baliq'],['سَيْفٌ','qilich'],['سَمَاءٌ','osmon']],
+ notes:["Yupqa «s» — qalin ص bilan adashtirmang.","<b>Ikhfo</b>: مَنسَكًا. Lam shamsiy: ٱلسَّمَاءِ."],
+ istisno:[],rel:['nun','lam','tafxim']},
+{c:'ش',n:'Shin',ar:'شِين',t:'sh',conn:true,mk:"Til o'rtasi + qattiq tanglay.",sf:"Hams, rakhawa, istifal, infitah, ismat + tafashshi",
+ w:[['شَمْسٌ','quyosh'],['شَجَرَةٌ','daraxt'],['شَهْرٌ','oy']],
+ notes:["<b>Tafashshi</b>: tovush og'iz ichida yoyilib tarqaladi.","<b>Ikhfo</b>: أَنشَرَهُ. Lam shamsiy: ٱلشَّمْسُ."],
+ istisno:[],rel:['nun','lam']},
+{c:'ص',n:'Sod',ar:'صَاد',t:'ṣ',conn:true,mk:"Til uchi + pastki old tishlar ustki qismi (sin bilan bir joy), til orqasi ko'tariladi.",sf:"Hams, rakhawa, isti'lo, itbaq, ismat + safir",
+ w:[['صَقْرٌ','lochin'],['صَابُونٌ','sovun'],['صُورَةٌ','rasm']],
+ notes:["<b>Qalin (tafxim)</b>: isti'lo + itbaq. Lablar sal yumaloqlanadi.","Kasra bilan ham qalin: ٱلصِّرَٰطَ (sod qalin, kasra ham qalin ohangda).","Qalin harfdan keyingi alif ham qalin: ٱلصَّالِحَاتِ.","<b>Ikhfo</b> (qalin): يَنصُرُكُمْ. Lam shamsiy: ٱلصَّلَاةُ."],
+ istisno:["صٓ (Sod surasi boshida) — mad lazim harfiy mukhaffaf: 6 harakat."],
+ rel:['tafxim','nun','lam','madd']},
+{c:'ض',n:'Dod',ar:'ضَاد',t:'ḍ',conn:true,mk:"Tilning yon qirrasi (chap yoki o'ng) + yuqori jag' oxirgi tishlari.",sf:"Jahr, rakhawa, isti'lo, itbaq, ismat + istitola (cho'zilish)",
+ w:[['ضِفْدَعٌ','baqa'],['ضَيْفٌ','mehmon'],['ضَوْءٌ','nur']],
+ notes:["Arab tiliga xos eng qiyin harflardan; <b>«d» emas, «z» ham emas</b> — qalin va cho'ziladi.","<b>Ikhfo</b> (qalin): مَنضُودٍ. Lam shamsiy: ٱلضَّالِّينَ.","ٱلضَّالِّينَ — ham dod, ham <b>mad lazim kalimiy musaqqal</b> (6 harakat)."],
+ istisno:["Ḍad (ض) va Ẓa (ظ) ni aralashtirmang: ضَلَّ (adashdi) ≠ ظَلَّ (bo'lib qoldi)."],
+ rel:['tafxim','madd','nun','lam']},
+{c:'ط',n:'To',ar:'طَاء',t:'ṭ',conn:true,mk:"Til uchi + yuqori old tishlar ildizi (ta/dal bilan bir joy), til orqasi ko'tariladi.",sf:"Jahr, shidda, isti'lo, itbaq, ismat + qalqala",
+ w:[['طَيْرٌ','qush'],['طَاوُوسٌ','tovus'],['طِفْلٌ','bola']],
+ notes:["<b>Qalin</b> «t»; ta (ت) bilan farqlang.","<b>Qalqala</b> harfi: يَطْمَعُونَ.","<b>Ikhfo</b> (qalin): يَنطِقُونَ. Lam shamsiy: ٱلطَّيْرِ.","<b>Mutajanisayn</b>: وَدَّت طَّائِفَةٌ (ت→ط)."],
+ istisno:["أَحَطتُ، بَسَطتَ — ط sokin, ت dan oldin: <b>idg'om naqis</b> (ط ning qalinligi saqlanadi)."],
+ rel:['tafxim','qalqala','idgham','nun','lam']},
+{c:'ظ',n:'Zo',ar:'ظَاء',t:'ẓ',conn:true,mk:"Til uchi + yuqori old tishlar uchi (zal/sa bilan bir joy), til orqasi ko'tariladi.",sf:"Jahr, rakhawa, isti'lo, itbaq, ismat",
+ w:[['ظَرْفٌ','konvert'],['ظُهْرٌ','peshin'],['ظَبْيٌ','kiyik']],
+ notes:["<b>Qalin «z»</b> (zal ning qalin varianti); til tishlar orasida.","<b>Ikhfo</b> (qalin): يَنظُرُونَ. Lam shamsiy: ٱلظَّالِمُونَ.","<b>Mutajanisayn</b>: إِذ ظَّلَمْتُمْ (ذ→ظ)."],
+ istisno:[],rel:['tafxim','idgham','nun','lam']},
+{c:'ع',n:'Ayn',ar:'عَيْن',t:'ʿ',conn:true,mk:"Halqning o'rta qismi (ho bilan bir joy).",sf:"Jahr, tawassut, istifal, infitah, ismat",
+ w:[['عَيْنٌ','ko\'z'],['عِنَبٌ','uzum'],['عَسَلٌ','asal']],
+ notes:["Tomoqni siqib chiqariladigan jarangli tovush — hamza ham emas, «a» ham emas.","<b>Izhor halqiy</b>: أَنْعَمْتَ. Lam qamariy: ٱلْعَالَمِينَ.","Ochiluvchi harflar: عٓسٓقٓ — «ayn» da <b>mad lazim harfiy</b> (4 yoki 6 harakat)."],
+ istisno:["Ayn da mad lazim harfiy <b>4 yoki 6</b> harakat joiz (boshqa lazim harflar faqat 6)."],
+ rel:['nun','lam','madd']},
+{c:'غ',n:"G'oyn",ar:'غَيْن',t:"g'",conn:true,mk:"Halqning yuqori qismi (xo bilan bir joy).",sf:"Jahr, rakhawa, isti'lo, infitah, ismat",
+ w:[['غُرَابٌ','qarg\'a'],['غَيْمٌ','bulut'],['غَزَالٌ','kiyik']],
+ notes:["Qalin «g'» (g'arg'ara).","<b>Izhor halqiy</b>: مِنْ غِلٍّ. Lam qamariy: ٱلْغَفُورُ."],
+ istisno:[],rel:['tafxim','nun','lam']},
+{c:'ف',n:'Fa',ar:'فَاء',t:'f',conn:true,mk:"Pastki labning ichki qirrasi + yuqori old tishlar uchi.",sf:"Hams, rakhawa, istifal, infitah, izlaq",
+ w:[['فِيلٌ','fil'],['فَأْرٌ','sichqon'],['فَمٌ','og\'iz']],
+ notes:["Mim sokindan keyin <b>izhor shafawiy mubolag'a</b>: هُمْ فِيهَا — mim ni yashirmang.","Nun sokindan keyin <b>ikhfo</b>: أَنفُسَكُمْ. Lam qamariy: ٱلْفَجْرِ."],
+ istisno:[],rel:['mim','nun','lam']},
+{c:'ق',n:'Qof',ar:'قَاف',t:'q',conn:true,mk:"Til orqa qismi + yumshoq tanglay (kofdan ham chuqurroq).",sf:"Jahr, shidda, isti'lo, infitah, ismat + qalqala",
+ w:[['قَلَمٌ','qalam'],['قِطٌّ','mushuk'],['قَمَرٌ','oy']],
+ notes:["<b>Qalin</b> va <b>qalqala</b> harfi: ٱلْحَقْ → ٱلْحَقُّ (vaqfda).","<b>Ikhfo</b> (qalin): مِن قَبْلُ.","<b>Mutaqoribayn</b>: أَلَمْ نَخْلُقكُّم (ق→ك).","قٓ — mad lazim harfiy (6 harakat). Lam qamariy: ٱلْقَمَرُ."],
+ istisno:["أَلَمْ نَخْلُقكُّم da qof ning qalqalasi yo'q — kof ga singadi."],
+ rel:['qalqala','tafxim','idgham','nun','lam']},
+{c:'ك',n:'Kaf',ar:'كَاف',t:'k',conn:true,mk:"Til orqa qismi (qofdan sal oldinda) + tanglay.",sf:"Hams, shidda, istifal, infitah, ismat",
+ w:[['كِتَابٌ','kitob'],['كَلْبٌ','it'],['كُرَةٌ','to\'p']],
+ notes:["Yupqa «k» — qalin ق bilan adashtirmang.","<b>Ikhfo</b>: مِنكُمْ. Lam qamariy: ٱلْكِتَابُ.","<b>Mutaqoribayn</b>: ق→ك (نَخْلُقكُّم)."],
+ istisno:[],rel:['nun','lam','idgham']},
+{c:'ل',n:'Lam',ar:'لَام',t:'l',conn:true,mk:"Til yon qirralarining oldingi qismi + yuqori old tishlar ildizi.",sf:"Jahr, tawassut, istifal, infitah, izlaq + inhiraf",
+ w:[['لَيْمُونٌ','limon'],['لَبَنٌ','sut'],['لِسَانٌ','til']],
+ notes:["<b>Lam ta'rif</b>: qamariy (aniq) va shamsiy (singadi).","<b>Lafzul-jalola</b> (ٱللَّه): fatha/dammadan keyin qalin, kasradan keyin yupqa.","<b>Lam fe'l</b>: قُلْ نَعَمْ (izhor), قُل رَّبِّ (idg'om).","Lam ning ikkita qoida mavzusi alohida (Lam)."],
+ istisno:["بَلْ رَانَ (Mutaffifin 14) — lam ra ga singmaydi: <b>sakta</b> qilinadi."],
+ rel:['lam','idgham','tafxim']},
+{c:'م',n:'Mim',ar:'مِيم',t:'m',conn:true,mk:"Ikki lab (lablar yopiladi) + burundan g'unna.",sf:"Jahr, tawassut, istifal, infitah, izlaq + g'unna",
+ w:[['مَاءٌ','suv'],['مَسْجِدٌ','masjid'],['مِفْتَاحٌ','kalit']],
+ notes:["<b>Mim sokin</b>: ikhfo shafawiy (ب), idg'om mislayn (م), izhor shafawiy (qolgan 26 harf).","<b>Mim mushaddad</b>: g'unna bilan 2 harakat: ثُمَّ.","<b>Mim jam'</b>: عَلَيْهِمُ ٱلْقِتَالُ (wasl da damma)."],
+ istisno:["Mim sokin, fo (ف) va vov (و) dan oldin — <b>izhor mubolag'a</b> bilan o'qiladi (ikhfo bo'lib ketmasin)."],
+ rel:['mim','nun','idgham']},
+{c:'ن',n:'Nun',ar:'نُون',t:'n',conn:true,mk:"Til uchi (lamdan sal pastda) + yuqori old tishlar ildizi; g'unna burundan.",sf:"Jahr, tawassut, istifal, infitah, izlaq + g'unna",
+ w:[['نَجْمٌ','yulduz'],['نَهْرٌ','daryo'],['نَارٌ','olov']],
+ notes:["<b>Nun sokin va tanvin</b>: izhor, idg'om, iqlab, ikhfo.","<b>Nun mushaddad</b>: g'unna 2 harakat: إِنَّ.","Yuqoridagi to'rt qoidaning batafsil jadvali alohida mavzuda."],
+ istisno:["Bir so'zda nun sokin + vov/ya: <b>izhor mutlaq</b> — دُنْيَا، بُنْيَانٌ، صِنْوَانٌ، قِنْوَانٌ.","يٰسٓ وَٱلْقُرْءَانِ، نٓ وَٱلْقَلَمِ da nun izhor bilan o'qiladi (Hafs)."],
+ rel:['nun','mim','idgham']},
+{c:'ه',n:'Ha',ar:'هَاء',t:'h',conn:true,mk:"Halqning eng quyi qismi (aqsa-l-halq, hamza bilan bir joy).",sf:"Hams, rakhawa, istifal, infitah, ismat",
+ w:[['هِلَالٌ','hilol'],['هَاتِفٌ','telefon'],['هُدْهُدٌ','hudhud']],
+ notes:["Yengil, nafasli «h» — ح dan farqli (u chuqur-siqiq).","<b>Izhor halqiy</b>: مِنْ هَادٍ.","<b>Ha kinoya</b> (olmosh «u»): بِهِ — ikki harakatli orasida <b>silah</b> bilan cho'ziladi.","Ta marbuta vaqfda «ha» bo'ladi: رَحْمَةٌ → رَحْمَهْ."],
+ istisno:["Ha kinoya sokin harfdan keyin kelsa silah bo'lmaydi: فِيهِ هُدًى. Lekin <b>فِيهِۦ مُهَانًا</b> (Furqon 69) da silah bor!","Silahsiz o'qiladigan ha: أَرْجِهْ، فَأَلْقِهْ، يَرْضَهُ لَكُمْ، يَأْتِهِ، يَتَّقْهِ.","عَلَيْهُ ٱللَّهَ (Fath 10) va أَنسَانِيهُ (Kahf 63) — ha da <b>damma</b>."],
+ rel:['madd','nun','vaqf']},
+{c:'و',n:'Vav',ar:'وَاو',t:'v',conn:false,mk:"Ikki lab (dumaloqlanib, ochiq) — madd da jawf.",sf:"Jahr, rakhawa, istifal, infitah, izlaq (madd/lin harfi)",
+ w:[['وَرْدَةٌ','atirgul'],['وَلَدٌ','o\'g\'il bola'],['وَجْهٌ','yuz']],
+ notes:["<b>Madd harfi</b>: damma dan keyin sokin vov: يَقُولُ، نُورٌ (2 harakat).","<b>Lin harfi</b>: fatha dan keyin sokin vov: خَوْفٌ — vaqfda 2/4/6.","Ulanmaydi.","Jam' vovi: قَالُوا۟ — keyingi alif o'qilmaydi.","Nun→vov idg'omi: مِن وَالٍ. Mim sokin + vov: izhor mubolag'a: عَلَيْهِمْ وَلَا."],
+ istisno:["Idg'omda vov <b>madd harfi</b> bo'lsa (آمَنُوا وَعَمِلُوا) — singmaydi, izhor bo'ladi."],
+ rel:['madd','nun','mim','idgham']},
+{c:'ي',n:'Ya',ar:'يَاء',t:'y',conn:true,mk:"Til o'rtasi + qattiq tanglay — madd da jawf.",sf:"Jahr, rakhawa, istifal, infitah, ismat (madd/lin harfi)",
+ w:[['يَدٌ','qo\'l'],['يَمَامَةٌ','kaptar'],['يَوْمٌ','kun']],
+ notes:["<b>Madd harfi</b>: kasra dan keyin sokin ya: قِيلَ، فِي (2 harakat).","<b>Lin harfi</b>: fatha dan keyin sokin ya: بَيْتٌ، خَيْرٌ.","Nun→ya idg'omi: مَن يَقُولُ (g'unna bilan).","Ya hamza o'rindig'i bo'ladi: سُئِلَ."],
+ istisno:["Ya madd harfi bo'lsa idg'om bo'lmaydi: فِي يَوْمٍ — izhor."],
+ rel:['madd','nun','idgham','hamza']},
+{c:'ء',n:'Hamza',ar:'هَمْزَة',t:"'",conn:false,special:'hamza',mk:"Halqning eng quyi qismi (aqsa-l-halq).",sf:"Jahr, shidda, istifal, infitah, ismat",
+ w:[['سَأَلَ','so\'radi'],['مُؤْمِنٌ','mo\'min'],['سُئِلَ','so\'ralgan']],
+ notes:["Hamza — alohida harf; o'rindiqlari: alif (أ إ), vov (ؤ), ya (ئ) yoki yolg'iz (ء).","<b>Hamzat qat'</b> — doim o'qiladi: أَنَا، إِنَّ. <b>Hamzat wasl</b> (ٱ) — faqat boshlanganda.","O'rindiq tanlash: kasra > damma > fatha > sukun (eng kuchli harakat o'rindiq tanlaydi).","Hamza nafasni tomoqda bir zum to'xtatib o'qiladi — qo'pol «urib» yubormang."],
+ istisno:["Alif ustidagi ٱ (wasl) hamza emas — u vaslda tushadi."],
+ rel:['hamza','wasl','madd']},
+{c:'ة',n:'Ta marbuta',ar:'تَاء مَرْبُوطَة',t:'t/h',conn:false,special:'tam',mk:"Vaslda ta kabi (til uchi), vaqfda ha kabi (halq).",sf:"Vaslda: ta; Vaqfda: ha",
+ w:[['رَحْمَةٌ','rahmat'],['جَنَّةٌ','jannat'],['صَلَاةٌ','namoz']],
+ notes:["Faqat so'z <b>oxirida</b> keladi (ismlarda).","<b>Vasl</b> da «t»: رَحْمَةٌ — rahmatun.","<b>Vaqf</b> da «h»: رَحْمَهْ — rahmah (tanvin tushadi, sokin qilinadi)."],
+ istisno:["Ochiq yozilgan ta (ت) — masalan رَحْمَتَ، نِعْمَتَ — Hafs rivoyatida vaqfda ham <b>ta</b> bo'lib qoladi."],
+ rel:['vaqf']},
+{c:'لا',n:'Lam-Alif',ar:'لَام أَلِف',t:'lā',conn:false,special:'lamalif',mk:"Lom + alif madd (2 harakat).",sf:"Lom va madd alif",
+ w:[['لَا','yo\'q'],['لَامٌ','lom'],['كَلَامٌ','so\'z']],
+ notes:["Lom bilan alif ulanganda <b>maxsus birikma</b> (ﻻ) hosil qiladi — bu alohida harf emas.","Madd tabiiy: لَا — 2 harakat."],
+ istisno:[],rel:['madd']}
+];
+
+/* ============ YORDAMCHI FUNKSIYALAR ============ */
+const AR='[\\u0600-\\u06FF\\u0750-\\u077F\\u08A0-\\u08FF\\uFB50-\\uFDFF\\uFE70-\\uFEFF\\u200D]+';
+const RX=new RegExp(AR+'(?:[ \\u00A0]+'+AR+')*','g');
+const fmt=s=>String(s).replace(RX,m=>'<span class="ar">'+m+'</span>');
+const forms=(c,conn)=>{const f=ZWJ+c;return{iso:c,fin:f,ini:conn?c+ZWJ:c,med:conn?ZWJ+c+ZWJ:f}};
+
+/* Mavzu bloklari renderi */
+function blocks(b){return b.map(x=>{
+ if(x.h)return '<h3>'+fmt(x.h)+'</h3>';
+ if(x.p)return '<p>'+fmt(x.p)+'</p>';
+ if(x.tip)return '<div class="tip">'+fmt(x.tip)+'</div>';
+ if(x.note)return '<div class="note">'+fmt(x.note)+'</div>';
+ if(x.list)return '<ul>'+x.list.map(i=>'<li>'+fmt(i)+'</li>').join('')+'</ul>';
+ if(x.ex)return '<div class="exg">'+x.ex.map(e=>'<div class="exi">'+(e[2]?'<div class="emo">'+e[2]+'</div>':'')+'<span class="ar">'+e[0]+'</span><small>'+fmt(e[1]||'')+'</small></div>').join('')+'</div>';
+ if(x.tbl){const[h,...r]=x.tbl;return '<div class="tw"><table><tr>'+h.map(c=>'<th>'+fmt(c)+'</th>').join('')+'</tr>'+r.map(row=>'<tr>'+row.map(c=>'<td>'+fmt(c)+'</td>').join('')+'</tr>').join('')+'</table></div>';}
+ if(x.raw)return x.raw;
+ return '';}).join('');}
+
+/* ============ HARF DARSI ============ */
+function letterPage(i){
+ const l=L[i],F=forms(l.c,l.conn),t=l.t;
+ let h='<h2>'+(i+1)+'-dars. '+l.c+' — '+l.n+'</h2><p class="sub">'+l.ar.replace(RX,'')+' Harfni alohida o\'rganamiz: shakli, tovushi, makhraji, harakatlar bilan, so\'zlarda va unga tegishli tajvid qoidalari.</p>';
+ h+='<div class="card hero"><div class="letter sp" data-say="'+l.ar+'" data-aud="h'+i+'" title="Bosing — ovoz">'+l.c+'</div><div class="meta"><div class="name">'+l.n+' <span class="ar nm-ar">'+l.ar+'</span></div><div class="kv"><b>Tovushi:</b><span>«'+t+'»</span><b>Makhraj:</b><span>'+fmt(l.mk)+'</span><b>Sifatlari:</b><span>'+l.sf+'</span><b>Ulanishi:</b><span>'+(l.special?'—':(l.conn?'Ikki tomonga ulanadi':'Faqat oldingi harfga ulanadi (keyingiga ulanmaydi)'))+'</span></div></div></div>';
+ h+='<div style="margin:.7rem 0"><button class="learn'+(isL(i)?' done':'')+'" id="lbtn" onclick="toggleLearn('+i+')">'+(isL(i)?'⭐ O\'rgandim!':'☆ Men bu harfni o\'rgandim')+'</button></div>';
+ if(!l.special||l.special==='hamza'||l.special==='tam'){
+  h+='<h3>Harfning to\'rt shakli</h3><div class="forms"><div><small>Yolg\'iz</small><span class="ar">'+F.iso+'</span></div><div><small>Boshida</small><span class="ar">'+F.ini+'</span></div><div><small>O\'rtasida</small><span class="ar">'+F.med+'</span></div><div><small>Oxirida</small><span class="ar">'+F.fin+'</span></div></div>';
+ }
+ if(l.special==='lamalif'){
+  h+='<h3>Birikma shakllari</h3><div class="forms"><div><small>Yolg\'iz</small><span class="ar">لا</span></div><div><small>Oxirida (ulanib)</small><span class="ar">ـلا</span></div><div><small>Harakat bilan</small><span class="ar">لَا</span></div><div><small>Kichik alifli</small><span class="ar">لَٰ</span></div></div>';
+ }
+ /* harakatlar */
+ const base=(l.c==='ا')?'أ':(l.special==='tam'?'ت':l.c);
+ if(l.special!=='lamalif'){
+  const cell=(a,s)=>'<div class="cell"><span class="ar">'+a+'</span><small>'+s+'</small></div>';
+  const bt=(l.c==='ا'||l.c==='ء')?"'":(l.special==='tam'?'t':t);
+  const sh=base;
+  const Q=['خ','ص','ض','ط','ظ','غ','ق','ر'].includes(l.c);
+  const A=Q?'o':'a',AA=Q?'ō':'ā';
+  if(Q)h+='<div class="tip"><b>Qalin harf:</b> fatha «a» emas, <b>«o»</b> ga yaqin o\'qiladi ('+bt+'o, '+bt+'ō). Kasra va dammada: '+bt+'i, '+bt+'u.</div>';
+  h+='<h3>Harakatlar bilan mashq</h3><div class="hk">'
+   +cell(sh+FATHA,bt+A)+cell(sh+KASRA,bt+'i')+cell(sh+DAMMA,bt+'u')
+   +cell(sh+FT,bt+A+'n')+cell(sh+KT,bt+'in')+cell(sh+DT,bt+'un')+'</div>';
+  h+='<h3>Madd (cho\'zish) va sukun, shadda</h3><div class="hk">'
+   +cell(sh+FATHA+'ا',bt+AA)+cell(sh+KASRA+'ي',bt+'ī')+cell(sh+DAMMA+'و',bt+'ū')
+   +cell('أَ'+sh+SUK,"a"+bt)+cell('أَ'+sh+SHD+FATHA,'a'+bt+bt+A)+cell(sh+FATHA+'ٰ',bt+AA+' (kichik alif)')+'</div>';
+ }
+ h+='<h3>So\'zlarda</h3>'+blocks([{ex:l.w.map(w=>[w[0],w[1],EMO[bare(w[0])]||''])}]);
+ if(l.notes.length)h+='<h3>Qoidalar va eslatmalar</h3>'+blocks([{list:l.notes}]);
+ if(l.istisno&&l.istisno.length)l.istisno.forEach(n=>h+=blocks([{note:n}]));
+ if(l.rel&&l.rel.length)h+='<h3>Shu harf bilan bog\'liq tajvid mavzulari</h3><div class="chips">'+l.rel.map(r=>'<a class="chip" onclick="go(\''+r+'\')">'+(TITLE[r]||r)+'</a>').join('')+'</div>';
+ return h;
+}
+
+/* ============ TAJVID VA BOSHQA MAVZULAR ============ */
+const PAGES=[];
+const add=(id,g,t,sub,b)=>PAGES.push({id,g,t,sub,b});
+
+add('belgilar','Asoslar','Harakat va belgilar',"Mushafda uchraydigan barcha belgilar",[
+ {h:'Asosiy harakatlar'},
+ {tbl:[['Belgi','Nomi','O\'qilishi','Misol'],
+  ['بَ','Fatha (ـَ)','«a» — og\'iz ochiladi','بَ'],['بِ','Kasra (ـِ)','«i» — jag\' pastga','بِ'],['بُ','Damma (ـُ)','«u» — lablar dumaloq','بُ'],
+  ['بً','Fathatan (ـً)','«an» (harf+alif)','بًا'],['بٍ','Kasratan (ـٍ)','«in»','بٍ'],['بٌ','Dammatan (ـٌ)','«un»','بٌ'],
+  ['بْ','Sukun (ـْ)','Harakatsiz, sokin','أَبْ'],['بّ','Shadda (ـّ)','Harf ikki marta: birinchisi sokin, ikkinchisi harakatli','رَبَّ']]},
+ {tip:'1 harakat = barmoqni bir marta bukib ochish vaqti. Madd 2 harakat = ikki bukish, 4 harakat = to\'rt bukish, 6 harakat = olti bukish.'},
+ {h:'Mushafdagi qo\'shimcha belgilar'},
+ {tbl:[['Belgi','Nomi','Ma\'nosi','Misol'],
+  ['ٰ','Kichik alif (alif xanjariya)','Madd tabiiy: alif kabi 2 harakat cho\'ziladi','هَٰذَا ٱلرَّحْمَٰنِ'],
+  ['ٓ','Madd belgisi','Cho\'zish kerakligini ko\'rsatadi','آ  جَآءَ'],
+  ['ۥ','Kichik vov','Ha kinoya da silah (cho\'zish): «hu»','لَهُۥ'],
+  ['ۦ','Kichik ya','Ha kinoya da silah: «hi»','بِهِۦ'],
+  ['ٱ','Hamzat wasl','Boshlanganda o\'qiladi, o\'rtada tushadi','ٱلْحَمْدُ'],
+  ['ۢ','Kichik mim','Iqlab: nun/tanvin → mim','مِنۢ بَعْدِ'],
+  ['۟','Dumaloq nol (sifr mustadir)','Bu harf <b>hech qachon</b> o\'qilmaydi','قَالُوا۟'],
+  ['۠','Cho\'ziq nol (sifr mustatil)','Vaslda o\'qilmaydi, vaqfda o\'qiladi','أَنَا۠'],
+  ['ۜ','Sakta (س)','Nafas olmay qisqa to\'xtash','عِوَجَا ۜ'],
+  ['۞','Hizb / ruk\'u','Qur\'on bo\'lagi belgisi','']]},
+ {h:'Tanvin va idg\'om/ikhfo belgilari'},
+ {p:'Mushafda tanvinning <b>ikki xil yozilishi</b> bor: yonma-yon (ـٌ ـٍ ـً) — <b>izhor</b> (aniq o\'qiladi); ketma-ket/ustma-ust (ࣱ ࣲ ࣰ) — <b>ikhfo, idg\'om, iqlab</b> (yashiriladi yoki singadi).'},
+ {p:'<b>Idg\'om belgisi:</b> singuvchi harf sukunsiz yoziladi, keyingi harfda <b>shadda</b> bo\'ladi: مِن نُّورٍ — nun sukunsiz, nun da shadda.'},
+ {p:'<b>Izhor belgisi:</b> harf ustida sukun bor: مِنْ هَادٍ.'},
+ {note:'Idg\'om bo\'lganda harf va keyingi harf <b>bitta ikkilangan harfga</b> aylanadi; shuning uchun yuqorida sukun yo\'q, keyingi harfda shadda bor.'}
+]);
+
+add('shakllar','Asoslar','Harf shakllari va ulanish',"28 harfning to'rt shakli, ulanmaydigan 6 harf, nuqtalar",[
+ {h:'Ulanmaydigan 6 harf'},
+ {p:'Faqat oldingi harfga ulanadi, keyingisiga <b>ulanmaydi</b>: ا د ذ ر ز و. Shuning uchun ulardan keyin yangi so\'z shakli (boshlovchi) boshlanadi.'},
+ {ex:[['دَارٌ','«d-a-r» — hammasi ulanmaydi'],['وَرَدَ','hech biri ulanmaydi'],['بَاب','ا dan keyin yangi shakl']]},
+ {h:'28 harf shakllari jadvali'},
+ {raw:'<div class="tw"><table><tr><th>Harf</th><th>Yolg\'iz</th><th>Boshida</th><th>O\'rtasida</th><th>Oxirida</th></tr>'+L.slice(0,28).map(l=>{const f=forms(l.c,l.conn);return '<tr><td>'+l.n+'</td><td><span class="ar">'+f.iso+'</span></td><td><span class="ar">'+f.ini+'</span></td><td><span class="ar">'+f.med+'</span></td><td><span class="ar">'+f.fin+'</span></td></tr>'}).join('')+'</table></div>'},
+ {h:'Nuqtalar bo\'yicha guruhlar'},
+ {tbl:[['Guruh','Harflar'],
+  ['Nuqtasiz','ا ح د ر س ص ط ع ك ل م ه و'],
+  ['1 nuqta ustida','خ ذ ز ض ظ غ ف ن'],
+  ['1 nuqta ostida','ب ج'],
+  ['2 nuqta ustida','ت ق'],
+  ['2 nuqta ostida','ي'],
+  ['3 nuqta ustida','ث ش']]},
+ {h:'Bir-biriga o\'xshash shakllar'},
+ {tbl:[['Guruh','Harflar','Farqi'],
+  ['Ba oilasi','ب ت ث ن ي','Faqat nuqtalar (soni va joyi)'],
+  ['Jim oilasi','ج ح خ','Nuqta: ostida / yo\'q / ustida'],
+  ['Dal oilasi','د ذ','Ustida nuqta'],
+  ['Ra oilasi','ر ز','Ustida nuqta'],
+  ['Sin oilasi','س ش','Uch nuqta ustida'],
+  ['Sod oilasi','ص ض','Ustida nuqta'],
+  ['To oilasi','ط ظ','Ustida nuqta'],
+  ['Ayn oilasi','ع غ','Ustida nuqta'],
+  ['Fo / Qof','ف ق','1 nuqta / 2 nuqta']]},
+ {note:'Ya (ي) so\'z oxirida ba\'zi mushaflarda nuqtasiz (ى) yoziladi — bu <b>alif maqsura</b> deyiladi va «a» tovushini beradi (مُوسَى).'}
+]);
+
+add('hamza','Asoslar','Hamza va uning o\'rindiqlari',"Hamzat qat', hamzat wasl va yozilishi",[
+ {h:'Hamza nima?'},
+ {p:'Hamza (ء) — tomoqning eng tubidan chiqadigan, nafas bir lahza to\'xtab ochiladigan harf. U <b>alif, vov, ya</b> yoki <b>yolg\'iz</b> yoziladi.'},
+ {ex:[['أَ','alif ustida, fatha'],['إِ','alif ostida, kasra'],['ؤُ','vov ustida'],['ئِ','ya ustida'],['ءٌ','yolg\'iz']]},
+ {h:'Hamzat qat\' va hamzat wasl'},
+ {tbl:[['','Hamzat qat\'','Hamzat wasl'],
+  ['Yozilishi','أ  إ  ء','ٱ (ustida kichik ص)'],
+  ['Boshlanganda','O\'qiladi','O\'qiladi (harakat qoidasi bilan)'],
+  ['Vasl (ulab o\'qish)da','O\'qiladi','<b>O\'qilmaydi</b>'],
+  ['Misol','أَنَا، إِنَّ','ٱلْحَمْدُ، ٱكْتُبْ']]},
+ {h:'Hamza o\'rindig\'i qoidasi'},
+ {p:'Hamzaning o\'zi va undan oldingi harfning harakatlariga qaraladi — <b>eng kuchlisi</b> o\'rindiqni tanlaydi: <b>kasra &gt; damma &gt; fatha &gt; sukun</b>.'},
+ {tbl:[['Misol','Qoida'],
+  ['سُئِلَ','kasra eng kuchli → ya (ئ)'],
+  ['مُؤْمِنٌ','damma (oldin), sukun → vov (ؤ)'],
+  ['رَأْسٌ','fatha (oldin), sukun → alif'],
+  ['سَأَلَ','fatha-fatha → alif'],
+  ['مَسْـُٔولٌ','damma-damma → vov']]},
+ {tip:'Hamza so\'z <b>oxirida</b> kelsa, undan oldingi harfning harakatiga qarab yoziladi: قَرَأَ، يَقْرَأُ، لُؤْلُؤٌ.'},
+ ]);
+
+add('makhraj','Tajvid','Makhrajlar (harf chiqish joylari)',"5 joy va 17 makhraj",[
+ {p:'Arab harflari <b>5 asosiy joydan</b> (jawf, halq, lison, shafatayn, xaysham) va <b>17 makhrajdan</b> chiqadi.'},
+ {tbl:[['№','Joy','Makhraj','Harflar'],
+  ['1','Jawf (og\'iz-tomoq bo\'shlig\'i)','Madd harflari','ا و ي (sokin madd)'],
+  ['2','Halq — eng quyi','Aqsa-l-halq','ء ه'],
+  ['3','Halq — o\'rta','Awsat-ul-halq','ع ح'],
+  ['4','Halq — yuqori','Adna-l-halq','غ خ'],
+  ['5','Lison — eng orqa','Til tubi + yumshoq tanglay','ق'],
+  ['6','Lison','Til tubi (qofdan sal oldin)','ك'],
+  ['7','Lison — o\'rta','Til o\'rtasi + qattiq tanglay','ج ش ي'],
+  ['8','Lison — yon','Til yon qirrasi + yuqori jag\' oxirgi tishlari','ض'],
+  ['9','Lison — yon','Til yon qirrasi oldingi qismi + old tishlar','ل'],
+  ['10','Lison — uch','Til uchi + yuqori old tishlar ildizi','ن'],
+  ['11','Lison — uch','Til uchi (sal orqada)','ر'],
+  ['12','Lison — uch','Til uchi + yuqori old tishlar ildizi','ط د ت'],
+  ['13','Lison — uch','Til uchi + yuqori old tishlar uchi','ظ ذ ث'],
+  ['14','Lison — uch','Til uchi + pastki old tishlar tepasi','ص س ز'],
+  ['15','Shafatayn','Pastki lab ichi + yuqori old tishlar uchi','ف'],
+  ['16','Shafatayn','Ikki lab','ب م و'],
+  ['17','Xaysham (burun)','Burun bo\'shlig\'i','G\'unna (ن م)']]},
+ {tip:'Harf makhrajini bilish uchun uni <b>sokin qilib, oldiga hamza fatha</b> qo\'ying: أَبْ، أَتْ، أَثْ… Tovush qayerda to\'xtasa — shu makhraj.'}
+]);
+
+add('sifat','Tajvid','Harf sifatlari',"Zidli va zidsiz sifatlar, barcha harflar ro'yxati",[
+ {h:'Zidli sifatlar (5 juft)'},
+ {tbl:[['Sifat','Harflar','Ma\'nosi'],
+  ['Hams (10)','ف ح ث ه ش خ ص س ك ت (فَحَثَّهُ شَخْصٌ سَكَتَ)','Nafas tovush bilan birga oqadi'],
+  ['Jahr (19)','Qolgan harflar','Nafas to\'xtaydi, tovush kuchli'],
+  ['Shidda (8)','أ ج د ق ط ب ك ت (أَجِدُكَ قَطَبْتَ)','Tovush to\'liq to\'xtaydi'],
+  ['Tawassut (5)','ل ن ع م ر (لِنْ عُمَرْ)','Oraliq: to\'xtamaydi ham, oqmaydi ham'],
+  ['Rakhawa (16)','Qolgan harflar','Tovush oqib ketadi'],
+  ['Isti\'lo (7)','خ ص ض غ ط ق ظ (خُصَّ ضَغْطٍ قِظْ)','Til orqasi ko\'tariladi — <b>qalin</b>'],
+  ['Istifal (22)','Qolgan harflar','Til pastda — yupqa'],
+  ['Itbaq (4)','ص ض ط ظ','Til tanglayga yopishadi (isti\'lo ning kuchlisi)'],
+  ['Infitah (25)','Qolgan harflar','Til va tanglay orasi ochiq'],
+  ['Izlaq (6)','ف ر م ن ل ب (فَرَّ مِنْ لُبّ)','Til/lab uchidan yengil chiqadi'],
+  ['Ismat (23)','Qolgan harflar','Og\'ir, tezda chiqmaydi']]},
+ {h:'Zidsiz sifatlar'},
+ {tbl:[['Sifat','Harflar','Ma\'nosi'],
+  ['Safir','ص ز س','Hushtaksimon tovush'],
+  ['Qalqala','ق ط ب ج د (قُطْبُ جَدٍّ)','Sokin bo\'lganda «urilish»'],
+  ['Lin','و ي (fatha dan keyin sokin)','Yumshoq madd'],
+  ['Inhiraf','ل ر','Tilning og\'ishi'],
+  ['Takrir','ر','Titrash (lekin titratilmaydi!)'],
+  ['Tafashshi','ش','Tovushning yoyilishi'],
+  ['Istitola','ض','Cho\'zilish'],
+  ['G\'unna','ن م','Burundan tovush']]},
+ {tip:'<b>Eng qalin</b> harflar: isti\'lo + itbaq (ص ض ط ظ). <b>O\'rtacha qalin</b>: خ غ ق (isti\'lo, itbaqsiz).'}
+]);
+
+add('nun','Tajvid','Nun sokin va tanvin',"4 qoida: izhor, idg'om, iqlab, ikhfo",[
+ {p:'Nun sokin (نْ) yoki tanvin (ـً ـٍ ـٌ) dan keyin qaysi harf kelishiga qarab <b>4 xil</b> o\'qiladi.'},
+ {h:'1. Izhor halqiy — aniq o\'qish (6 harf)'},
+ {p:'Harflar: <b>ء ه ع ح غ خ</b>. Nun ni to\'liq, g\'unnasiz, aniq o\'qing.'},
+ {ex:[['مَنْ آمَنَ','ء'],['مِنْ هَادٍ','ه'],['أَنْعَمْتَ','ع'],['مِنْ حَكِيمٍ','ح'],['مِنْ غِلٍّ','غ'],['مِنْ خَيْرٍ','خ']]},
+ {h:'2. Idg\'om — singish (6 harf: يَرْمُلُونَ)'},
+ {p:'<b>Idg\'om bi g\'unna</b> (g\'unna bilan, 4 harf): ي ن م و. <b>Idg\'om bila g\'unna</b> (g\'unnasiz, 2 harf): ل ر.'},
+ {ex:[['مَن يَقُولُ','ي (naqis)'],['مِن وَلِيٍّ','و (naqis)'],['مِن مَّاءٍ','م (kamil)'],['مِن نُّورٍ','ن (kamil)'],['مِن رَّبِّهِمْ','ر (g\'unnasiz)'],['هُدًى لِّلْمُتَّقِينَ','ل (g\'unnasiz)']]},
+ {note:'Idg\'om <b>faqat ikki alohida so\'z orasida</b> bo\'ladi. Bir so\'z ichida nun sokindan keyin vov/ya kelsa — <b>izhor mutlaq</b>: دُنْيَا، بُنْيَانٌ، صِنْوَانٌ، قِنْوَانٌ.'},
+ {note:'يٰسٓ وَٱلْقُرْءَانِ va نٓ وَٱلْقَلَمِ da «nun» (harf nomi) vov ga singmaydi — Hafs rivoyatida izhor.'},
+ {h:'3. Iqlab — almashtirish (1 harf: ب)'},
+ {p:'Nun sokin/tanvin → <b>mim</b> ga aylanadi, lablar yopiladi, g\'unna bilan 2 harakat. Belgi: kichik mim ۢ.'},
+ {ex:[['مِنۢ بَعْدِ','nun → mim'],['أَنۢبِئْهُم','nun → mim'],['سَمِيعٌۢ بَصِيرٌ','tanvin → mim']]},
+ {h:'4. Ikhfo — yashirish (15 harf)'},
+ {p:'Harflar: <b>ت ث ج د ذ ز س ش ص ض ط ظ ف ق ك</b>. Eslab qolish bayti: <span class="ar">صِفْ ذَا ثَنَا كَمْ جَادَ شَخْصٌ قَدْ سَمَا ۝ دُمْ طَيِّبًا زِدْ فِي تُقًى ضَعْ ظَالِمَا</span>. Nun na izhor, na idg\'om: til keyingi harfning makhrajiga yaqinlashadi, g\'unna burundan 2 harakat.'},
+ {raw:'<div class="tw"><table><tr><th>Harf</th><th>Misol</th><th>Harf</th><th>Misol</th><th>Harf</th><th>Misol</th></tr>'+
+ [['ت','أَنتُمْ'],['ث','مَنثُورًا'],['ج','أَنجَيْنَا'],['د','أَندَادًا'],['ذ','مَن ذَا ٱلَّذِي'],['ز','فَإِن زَلَلْتُم'],['س','مَنسَكًا'],['ش','أَنشَرَهُ'],['ص','يَنصُرُكُمْ'],['ض','مَنضُودٍ'],['ط','يَنطِقُونَ'],['ظ','يَنظُرُونَ'],['ف','أَنفُسَكُمْ'],['ق','مِن قَبْلُ'],['ك','مِنكُمْ']]
+ .reduce((a,x,i)=>{if(i%3===0)a.push([]);a[a.length-1].push(x);return a},[]).map(r=>'<tr>'+r.map(x=>'<td>'+x[0]+'</td><td>'+fmt(x[1])+'</td>').join('')+'</tr>').join('')+'</table></div>'},
+ {tip:'Ikhfo darajasi: ص ض ط ظ ق dan oldin ikhfo <b>qalin</b> (tafxim), qolgan 10 harf dan oldin <b>yupqa</b> (tarqiq).'},
+ {h:'Tanvin bilan misollar'},
+ {ex:[['جَنَّاتٍ تَجْرِي','ikhfo'],['عَلِيمٌ حَكِيمٌ','izhor'],['غَفُورٌ رَّحِيمٌ','idg\'om bila g\'unna'],['سَمِيعٌۢ بَصِيرٌ','iqlab']]},
+ {h:'G\'unna mukammal: nun va mim mushaddad'},
+ {ex:[['إِنَّ','2 harakat g\'unna'],['ثُمَّ','2 harakat g\'unna'],['ٱلنَّاسِ','g\'unna'],['عَمَّ','g\'unna']]}
+]);
+
+add('mim','Tajvid','Mim sokin',"Ikhfo, idg'om va izhor shafawiy",[
+ {p:'Mim sokin (مْ) dan keyin kelgan harfga qarab <b>3 xil</b>:'},
+ {h:'1. Ikhfo shafawiy (harf: ب)'},
+ {p:'Mim ni lablar yengil yopilgan holda, <b>g\'unna bilan</b> yashirib o\'qing.'},
+ {ex:[['تَرْمِيهِم بِحِجَارَةٍ','mim + ba'],['وَهُم بِٱلْآخِرَةِ','mim + ba']]},
+ {h:'2. Idg\'om shafawiy / mislayn sag\'ir (harf: م)'},
+ {p:'Mim mim ga singadi, g\'unna bilan 2 harakat.'},
+ {ex:[['لَهُم مَّا','mim + mim'],['أَمْ مَنْ','mim + mim']]},
+ {h:'3. Izhor shafawiy (qolgan 26 harf)'},
+ {p:'Mim aniq, lablarni yopib o\'qiladi, g\'unnasiz.'},
+ {ex:[['ٱلْحَمْدُ','mim + dal'],['أَمْ لَمْ','mim + lam'],['هُمْ فِيهَا','mim + fo'],['عَلَيْهِمْ وَلَا ٱلضَّالِّينَ','mim + vov']]},
+ {note:'<b>Fo (ف) va vov (و)</b> dan oldin mim sokin <b>izhor mubolag\'a</b> bilan o\'qiladi (yashirib yuborilmaydi), chunki lablar yaqin makhrajda.'},
+ {note:'Mim sokin, kasra/damma bilan: <b>mim jam\'</b> (عَلَيْهِمْ) — vaqfda sokin, waslda hamzat wasl oldidan damma beriladi: عَلَيْهِمُ ٱلْقِتَالُ، أَنتُمُ ٱلْفُقَرَاءُ.'}
+]);
+
+add('lam','Tajvid','Lam: ta\'rif, lafzul-jalola, fe\'l',"Shamsiy/qamariy, Allohning «lom»i, fe'l lomi",[
+ {h:'1. Lam ta\'rif (ٱل)'},
+ {p:'<b>Qamariy (14 harf):</b> ا ب غ ح ج ك و خ ف ع ق ي م ه (ٱبْغِ حَجَّكَ وَخَفْ عَقِيمَهُ) — lam <b>o\'qiladi</b>, harf sokin.'},
+ {ex:[['ٱلْقَمَرُ','qamariy'],['ٱلْحَمْدُ','qamariy'],['ٱلْكِتَابُ','qamariy'],['ٱلْبَيْتُ','qamariy']]},
+ {p:'<b>Shamsiy (14 harf):</b> ت ث د ذ ر ز س ش ص ض ط ظ ل ن — lam <b>o\'qilmaydi</b>, keyingi harf shadda bilan ikkilanadi.'},
+ {ex:[['ٱلشَّمْسُ','shamsiy'],['ٱلنَّاسُ','shamsiy'],['ٱلرَّحْمَٰنُ','shamsiy'],['ٱللَّيْلُ','shamsiy'],['ٱلصَّلَاةُ','shamsiy']]},
+ {h:'2. Lafzul-jalola (ٱللَّه)'},
+ {p:'<b>Tafxim (qalin)</b> — undan oldin fatha yoki damma bo\'lsa: <b>tarqiq (yupqa)</b> — oldin kasra bo\'lsa.'},
+ {ex:[['قَالَ ٱللَّهُ','fatha → qalin'],['رَسُولُ ٱللَّهِ','damma → qalin'],['بِٱللَّهِ','kasra → yupqa'],['قُلِ ٱللَّهُمَّ','kasra → yupqa']]},
+ {h:'3. Lam fe\'l va harf'},
+ {p:'Fe\'l/harf lomi (قُلْ، بَلْ، هَلْ) odatda <b>izhor</b>, lekin <b>ل va ر</b> ga singadi:'},
+ {ex:[['قُلْ نَعَمْ','izhor'],['هَلْ تَرَىٰ','izhor'],['وَقُل رَّبِّ','idg\'om (ra)'],['بَل رَّفَعَهُ','idg\'om (ra)'],['قُل لَّا','idg\'om (lam)']]},
+ {note:'بَلْ رَانَ (Mutaffifin 14) — lam ra ga <b>singmaydi</b>; sakta qilib o\'qiladi: بَلْ ۜ رَانَ.'},
+ {note:'Lafzul-jalola: kasra aroziy (qul + ٱللَّهُمَّ da «qulil») dan keyin ham lom <b>yupqa</b> o\'qiladi.'}
+]);
+
+add('ra','Tajvid','Ra: tafxim va tarqiq',"Qachon qalin, qachon yupqa o'qiladi",[
+ {h:'Ra qalin (tafxim) bo\'ladigan holatlar'},
+ {list:['Ra da <b>fatha yoki damma</b> bo\'lsa: رَبِّ، رُسُلٌ، رَحْمَةٌ.','Ra sokin va oldidagi harakat <b>fatha/damma</b>: أَرْسَلَ، ٱلْقُرْآنِ.','Ra sokin, oldidan <b>aroziy kasra</b> (hamzat wasl kasrasi): ٱرْجِعُوا، أَمِ ٱرْتَابُوا.','Ra sokin, oldidan <b>asliy kasra</b>, lekin keyin isti\'lo harfi (bir so\'zda): قِرْطَاسٍ، فِرْقَةٍ، مِرْصَادًا.','Vaqfda: ra dan oldin sokin <b>isti\'lo</b> harfi bo\'lsa: ٱلْمِصْرِ، ٱلْقِطْرِ.']},
+ {ex:[['رَبِّ','fatha'],['رُسُلٌ','damma'],['أَرْسَلَ','sokin, fatha dan keyin'],['ٱرْجِعُوا','aroziy kasra'],['قِرْطَاسٍ','isti\'lo harfi bor']]},
+ {h:'Ra yupqa (tarqiq) bo\'ladigan holatlar'},
+ {list:['Ra da <b>kasra</b> bo\'lsa: رِزْقٌ، بِرَبِّ.','Ra sokin, oldidan <b>asliy kasra</b>, keyin isti\'lo harfi yo\'q: فِرْعَوْنَ، مِرْيَةٍ.','Vaqfda ra dan oldin <b>sokin ya</b> bo\'lsa: خَبِيرٌ → خَبِيرْ، قَدِيرْ، خَيْرْ.','Vaqfda oldin kasra, orada sokin harf (isti\'lo emas): ٱلسِّحْرِ.']},
+ {ex:[['رِزْقًا','kasra'],['فِرْعَوْنَ','asliy kasra, isti\'losiz'],['مِرْيَةٍ','tarqiq'],['خَبِيرٌ','vaqfda ya dan keyin']]},
+ {note:'فِرْقٍ (Shuaro 63) — asliy kasra va keyin qof (isti\'lo): ikkita vajh joiz — <b>tarqiq ham, tafxim ham</b>.'},
+ {note:'ٱلْمِصْرِ، ٱلْقِطْرِ (vaqfda) — ra dan oldin sokin isti\'lo harfi (ص ط) bo\'lgani uchun <b>tafxim</b>, garchi undan oldin kasra bo\'lsa ham.'},
+ {tip:'Ra ni takrir bilan (tilni titratib) o\'qimang. Til uchi bir marta tanglayga tegadi.'}
+]);
+
+add('tafxim','Tajvid','Tafxim va tarqiq (qalin va yupqa)',"Isti'lo harflari va darajalari",[
+ {p:'7 ta <b>isti\'lo harfi</b> doim qalin o\'qiladi: <b>خ ص ض غ ط ق ظ</b> (خُصَّ ضَغْطٍ قِظْ).'},
+ {h:'Qalinlik darajalari (kuchlisidan kuchsiziga)'},
+ {tbl:[['Daraja','Qoida','Misol'],
+  ['1','Fatha + keyin alif','قَالَ، صَارَ'],
+  ['2','Fatha','قَدَرَ، صَبَرَ'],
+  ['3','Damma','قُلْ، صُدُورِ'],
+  ['4','Sukun','يَنصُرُ، يَقْطَعُ'],
+  ['5','Kasra (eng yengil)','قِيلَ، صِرَاطَ']]},
+ {h:'Alifning qalin/yupqaligi'},
+ {p:'Alif o\'zidan oldingi harfga ergashadi: <b>qalin harfdan keyin — qalin</b>, yupqa harfdan keyin — yupqa.'},
+ {ex:[['قَالَ','qalin alif'],['كَانَ','yupqa alif'],['صَالِحٌ','qalin alif'],['سَاعَةٌ','yupqa alif']]},
+ {h:'Alohida uch harf'},
+ {list:['<b>Ra</b> — ba\'zan qalin, ba\'zan yupqa (Ra mavzusi).','<b>Lam</b> (ٱللَّه) — fatha/dammadan keyin qalin, kasradan keyin yupqa (Lam mavzusi).','<b>Alif</b> — oldingi harfga ergashadi.']},
+ {note:'Qalin harf kasra bilan kelsa ham, ohangi <b>qalin</b> qoladi: ٱلصِّرَٰطَ (sod qalin, kasra «i» sal og\'ir).'}
+]);
+
+add('qalqala','Tajvid','Qalqala',"Qalqala harflari va darajalari",[
+ {p:'Qalqala — sokin harfning chiqish joyida «urilib turish» (zarb). Harflari: <b>ق ط ب ج د</b> (قُطْبُ جَدٍّ).'},
+ {h:'Darajalari'},
+ {tbl:[['Daraja','Qachon','Misol'],
+  ['Sug\'ro (kichik)','So\'z o\'rtasida sokin','يَجْعَلُونَ، يَقْطَعُونَ، يَدْخُلُونَ'],
+  ['Vusto (o\'rta)','So\'z oxirida, vaslda','أَحَدٌ ٱللَّهُ'],
+  ['Kubro (katta)','So\'z oxirida, <b>vaqfda</b>','ٱلْفَلَقْ، مُحِيطْ، أَحَدْ'],
+  ['Akbar (eng katta)','Vaqfda + shadda','ٱلْحَقّ، ٱلْحَجّ']]},
+ {ex:[['يَجْعَلُونَ','sug\'ro'],['يَطْمَعُونَ','sug\'ro'],['ٱلْفَلَقْ','kubro'],['أَحَدْ','kubro'],['ٱلْحَقّ','akbar']]},
+ {note:'Qalqala <b>bo\'lmaydi</b> agar harf idg\'omda singib ketsa: قَد تَّبَيَّنَ (د), ٱرْكَب مَّعَنَا (ب), أَلَمْ نَخْلُقكُّم (ق).'},
+ {tip:'Qalin harflar (ق ط) da qalqala qalin, yupqalarida (ب ج د) yupqa bo\'ladi.'}
+]);
+
+add('madd','Tajvid','Madd: barcha turlari',"Asliy, furu'iy, lazim, arid, lin, silah, iwad, badal…",[
+ {h:'Madd harflari va ularning sharti'},
+ {tbl:[['Harf','Sharti','Misol'],
+  ['ا (alif)','Oldidagi harf <b>fatha</b>','قَالَ'],
+  ['و (vov sokin)','Oldidagi harf <b>damma</b>','يَقُولُ'],
+  ['ي (ya sokin)','Oldidagi harf <b>kasra</b>','قِيلَ'],
+  ['ٰ (kichik alif)','Fatha dan keyin','هَٰذَا']]},
+ {tip:'<b>Madd tovushi sababsiz</b> 2 harakat (asliy). Sabab (hamza yoki sukun) bo\'lsa — 4, 5 yoki 6 harakatgacha (furuiy).'},
+ {h:'1. Madd tabiiy (asliy) — 2 harakat'},
+ {ex:[['قَالَ','alif'],['يَقُولُ','vov'],['قِيلَ','ya'],['هَٰذَا','kichik alif']]},
+ {h:'2. Madd muttasil (ulangan) — 4–5 harakat (vojib)'},
+ {p:'Madd harfidan keyin <b>bir so\'z ichida</b> hamza keladi.'},
+ {ex:[['جَاءَ','alif+hamza'],['ٱلسَّمَاءِ','alif+hamza'],['سُوءٍ','vov+hamza'],['جِيءَ','ya+hamza']]},
+ {h:'3. Madd munfasil (ajralgan) — 4–5 harakat (joiz)'},
+ {p:'Madd harfi bir so\'z oxirida, hamza <b>keyingi so\'z boshida</b>.'},
+ {ex:[['فِي أَنفُسِكُمْ','ya | hamza'],['يَا أَيُّهَا','alif | hamza'],['قُوا أَنفُسَكُمْ','vov | hamza'],['بِمَا أُنزِلَ','alif | hamza']]},
+ {h:'4. Madd lazim — 6 harakat'},
+ {p:'Madd harfidan keyin <b>asliy sukun</b> (yoki shadda) — doim 6 harakat.'},
+ {tbl:[['Turi','Tavsifi','Misol'],
+  ['Kalimiy musaqqal','So\'zda, shadda bilan','ٱلضَّالِّينَ، ٱلْحَاقَّةُ، دَابَّةٍ'],
+  ['Kalimiy mukhaffaf','So\'zda, shaddasiz (Yunus 51, 91)','آلْـَٔانَ'],
+  ['Harfiy musaqqal','Harf nomi ichida, idg\'om bilan','الٓمٓ (لام+ميم)'],
+  ['Harfiy mukhaffaf','Harf nomi, shaddasiz','قٓ  نٓ  صٓ']]},
+ {tip:'Ochiluvchi harflar (fawatih) dan <b>نقص عسلكم</b> 8 harfda mad lazim harfiy bor (6 harakat). <b>حي طهر</b> 5 harfda — mad tabiiy (2 harakat).'},
+ {note:'Ayn (ع) da mad lazim harfiy: <b>4 yoki 6</b> harakat joiz: عٓسٓقٓ، كٓهيعٓصٓ.'},
+ {h:'5. Madd arid lissukun — 2, 4 yoki 6'},
+ {p:'Madd dan keyin so\'z oxirida harf, <b>vaqf qilinganda</b> sukun paydo bo\'ladi.'},
+ {ex:[['ٱلْعَالَمِينَ','vaqfda'],['نَسْتَعِينُ','vaqfda'],['ٱلرَّحِيمِ','vaqfda'],['يُوقِنُونَ','vaqfda']]},
+ {h:'6. Madd lin — 2, 4 yoki 6 (vaqfda)'},
+ {p:'Fatha dan keyin sokin vov/ya, undan keyin so\'z oxirida vaqf.'},
+ {ex:[['خَوْفٍ','vov lin'],['بَيْتٍ','ya lin'],['قُرَيْشٍ','ya lin'],['ٱلصَّيْفِ','ya lin']]},
+ {h:'7. Madd badal — 2 harakat'},
+ {p:'Hamza <b>madd harfidan oldin</b> keladi.'},
+ {ex:[['آمَنُوا','badal'],['أُوتُوا','badal'],['إِيمَانًا','badal']]},
+ {h:'8. Madd iwad — 2 harakat (vaqfda)'},
+ {p:'Fathatan bilan tugagan so\'zda vaqf: tanvin alifga almashadi.'},
+ {ex:[['عَلِيمًا → عَلِيمَا','iwad'],['حَكِيمًا → حَكِيمَا','iwad']]},
+ {note:'Ta marbuta bilan tugagan so\'zlarda iwad <b>bo\'lmaydi</b>: رَحْمَةً → رَحْمَهْ (ta → ha, alif yo\'q).'},
+ {note:'Nun ta\'kid xafifa ga: لَنَسْفَعًا (Alaq 15)، وَلَيَكُونًا (Yusuf 32)، إِذًا — vaqfda tanvin kabi alifga aylanadi.'},
+ {h:'9. Silah (ha kinoya ning cho\'zilishi)'},
+ {p:'Ha kinoya (olmosh «u») <b>ikki harakatli harf orasida</b> bo\'lsa cho\'ziladi.'},
+ {tbl:[['Turi','Qoida','Misol'],
+  ['Silah sug\'ro','Keyin hamza yo\'q → 2 harakat','بِهِۦ، لَهُۥ'],
+  ['Silah kubro','Keyin hamza → 4–5 harakat','مَالَهُۥٓ أَخْلَدَهُۥ']]},
+ {note:'Ha kinoya <b>sokin harfdan keyin</b> kelsa silah bo\'lmaydi: فِيهِ هُدًى، مِنْهُ آيَاتٌ.'},
+ {note:'Istisno: فِيهِۦ مُهَانًا (Furqon 69) — sokindan keyin bo\'lsa ham <b>silah bor</b> (ya cho\'ziladi).'},
+ {note:'Silah <b>o\'qilmaydigan</b> so\'zlar: أَرْجِهْ (Aʼrof 111, Shuaro 36), فَأَلْقِهْ (Naml 28), يَرْضَهُ لَكُمْ (Zumar 7), يَأْتِهِ (Toha 75), يَتَّقْهِ (Nur 52); عَلَيْهُ ٱللَّهَ (Fath 10) va أَنسَانِيهُ (Kahf 63) da — damma.'},
+ {h:'10. Madd farq'},
+ {p:'Istifham hamzasi + hamzat wasl: <b>6 harakat</b> (yoki tashil): آلذَّكَرَيْنِ، آللَّهُ (Yunus 59, Naml 59).'},
+ {h:'Harakat sonlari xulosasi'},
+ {tbl:[['Madd','Harakat'],['Tabiiy, Badal, Iwad, Silah sug\'ro','2'],['Muttasil, Munfasil, Silah kubro','4–5 (Hafs)'],['Arid, Lin arid','2, 4 yoki 6'],['Lazim, Farq','6']]}
+]);
+
+add('idgham','Tajvid','Idg\'om turlari (harfma-harf)',"Mislayn, mutajanisayn, mutaqoribayn va istisnolar",[
+ {p:'Idg\'om — birinchi harf (sokin) ikkinchisiga singishi. Harflar orasidagi <b>makhraj va sifat</b> munosabatiga qarab 3 xil:'},
+ {h:'1. Mutamosilayn (mislayn) — bir xil harflar'},
+ {p:'Makhraj ham, sifat ham bir xil: birinchisi sokin, ikkinchisi harakatli — <b>albatta idg\'om</b>.'},
+ {ex:[['ٱضْرِب بِّعَصَاكَ','ب+ب · idribbi\'asāka'],['رَبِحَت تِّجَارَتُهُمْ','ت+ت · rabiḥattijāratuhum'],['قُل لَّا','ل+ل · qullā'],['لَهُم مَّا','م+م · lahummā (g\'unna)']]},
+ {note:'Birinchi harf <b>madd harfi</b> (vov/ya) bo\'lsa idg\'om <b>bo\'lmaydi</b>: آمَنُوا وَعَمِلُوا (āmanū va\'amilū), فِي يَوْمٍ (fī yawmin) — izhor.'},
+ {h:'2. Mutajanisayn — makhraj bir, sifat boshqa'},
+ {tbl:[['Juft','Misol','O\'qilishi','Izoh'],
+  ['د ← ت','قَد تَّبَيَّنَ','qattabayyana','Dal ta ga singadi'],
+  ['ت ← د','أَثْقَلَت دَّعَوَا','asqaladda\'avā','Ta dal ga singadi'],
+  ['ت ← ط','وَدَّت طَّائِفَةٌ','waddaṭṭā\'ifatun','Ta to ga singadi (qalin)'],
+  ['ط ← ت','أَحَطتُ','aḥaṭṭu (qalin)','Idg\'om naqis: to ning qalinligi qoladi'],
+  ['ط ← ت','بَسَطتَ','basaṭṭa (qalin)','Idg\'om naqis'],
+  ['ذ ← ظ','إِذ ظَّلَمْتُمْ','izẓẓalamtum','Zal zo ga singadi (qalin)'],
+  ['ث ← ذ','يَلْهَث ذَّٰلِكَ','yalhaḏḏālika','Sa zal ga singadi'],
+  ['ب ← م','ٱرْكَب مَّعَنَا','arkammaʿanā','Ba mim ga singadi (g\'unna bilan)']]},
+ {h:'3. Mutaqoribayn — makhraj va sifat yaqin'},
+ {tbl:[['Juft','Misol','O\'qilishi','Izoh'],
+  ['ل ← ر','قُل رَّبِّ','qurrabbi','Lom ra ga singadi (g\'unnasiz)'],
+  ['ل ← ر','بَل رَّفَعَهُ','barrafaʿahu','Lom ra ga singadi'],
+  ['ق ← ك','أَلَمْ نَخْلُقكُّم','alam nakhlukkum','Qof kof ga singadi']]},
+ {note:'Mutaqoribayn idg\'omidagi istisno: <b>بَلْ رَانَ</b> — lom ra ga singmaydi, sakta bilan o\'qiladi: bal (sakta) rāna.'},
+ {h:'Nun sokin/tanvin va mim idg\'omi'},
+ {p:'Qarang: «Nun sokin va tanvin» (يرملون) va «Mim sokin» (م+م).'},
+ {h:'Idg\'om shamsiy'},
+ {p:'Lam ta\'rif + shamsiy harflar: ٱلشَّمْسُ، ٱلنَّاسُ — «Lam» mavzusiga qarang.'},
+ {tip:'Hafs rivoyatida <b>idg\'om kabir</b> (ikkala harf ham harakatli) <b>yo\'q</b>; faqat sag\'ir (birinchisi sokin).'}
+]);
+
+add('hamzat-wasl','Vasl va Vaqf','Hamzat wasl: boshlanish qoidalari',"Qachon o'qiladi, qanday harakat bilan boshlanadi",[
+ {p:'Hamzat wasl (ٱ) <b>faqat so\'z boshlanganda</b> o\'qiladi. Ulab (vasl) o\'qilganda <b>tushib qoladi</b>. Boshlanganda harakati so\'z turiga qarab beriladi:'},
+ {tbl:[['So\'z turi','Boshlanish harakati','Misol'],
+  ['ٱلْ (ta\'rif)','<b>Fatha</b>','ٱلْحَمْدُ → al-hamdu'],
+  ['Ismlar: ٱسْمٌ ٱبْنٌ ٱبْنَةٌ ٱمْرُؤٌ ٱمْرَأَةٌ ٱثْنَانِ ٱثْنَتَانِ','<b>Kasra</b>','ٱسْمٌ → ismun'],
+  ['Fe\'l amr (3 harfli): 3-harfda <b>damma</b>','<b>Damma</b>','ٱكْتُبْ → uktub، ٱنصُرْ → unsur'],
+  ['Fe\'l amr (3 harfli): 3-harfda fatha yoki kasra','<b>Kasra</b>','ٱضْرِبْ → idrib، ٱذْهَبْ → izhab'],
+  ['Fe\'l mazi/masdar (5-6 harfli)','<b>Kasra</b>','ٱسْتَغْفَرَ، ٱنطَلَقَ، ٱسْتِغْفَارٌ'],
+  ['Majhul fe\'l (3-harfi damma)','<b>Damma</b>','ٱسْتُضْعِفُوا → ustud\'ifu']]},
+ {note:'Hamzat wasl <b>istifham hamzasi</b> dan keyin tushadi: أَسْتَغْفَرْتَ (Munofiqun 6), أَصْطَفَى ٱلْبَنَاتِ.'},
+ {note:'ٱلْ + istifham hamzasi bo\'lsa — hamza ostida <b>madd farq</b> bo\'ladi: آلذَّكَرَيْنِ، آللَّهُ (6 harakat).'},
+ {h:'Misollar: vaslda va boshlanishda'},
+ {tbl:[['So\'z','Boshlanganda','Vaslda'],
+  ['ٱلْكِتَابُ','al-kitābu','dhālika l-kitābu'],
+  ['ٱسْمُ رَبِّكَ','ismu rabbika','bi-smi rabbika'],
+  ['ٱذْهَبْ','izhab','fa-dh-hab'],
+  ['ٱكْتُبْ','uktub','wa-ktub']]}
+]);
+
+add('vasl','Vasl va Vaqf','Vasl qoidalari (ulab o\'qish)',"Ikki sokin uchrashganda, silah, mim jam' va tanvin",[
+ {h:'1. Ikki sokin uchrashuvi'},
+ {p:'Oldingi so\'z oxirida sokin harf bo\'lib, keyingi so\'z hamzat wasl bilan boshlansa, <b>oldingi sokin harfga harakat beriladi</b>:'},
+ {tbl:[['Qoida','Misol'],
+  ['Asosan <b>kasra</b>','قُلِ ٱنظُرُوا — أَنِ ٱعْبُدُوا — أَوِ ٱنقُصْ — لَمْ يَكُنِ ٱلَّذِينَ'],
+  ['<b>Damma</b> — mim jam\' va jam\' vovi','عَلَيْهِمُ ٱلْقِتَالُ — أَنتُمُ ٱلْفُقَرَاءُ — ٱشْتَرَوُا ٱلضَّلَالَةَ'],
+  ['<b>Fatha</b> — «min» + ٱل','مِنَ ٱلنَّاسِ — مِنَ ٱلْمُؤْمِنِينَ'],
+  ['<b>Tanvin</b> — nun kasra bilan','أَحَدٌ ٱللَّهُ ٱلصَّمَدُ → ahadunillāhu'],
+  ['<b>Kasra</b> — «an» + ٱل','عَنِ ٱلنَّبَإِ ٱلْعَظِيمِ']]},
+ {h:'2. Hamzat wasl bilan boshlangan so\'zdan oldin tanvin'},
+ {ex:[['أَحَدٌ ٱللَّهُ','ahadun + allahu'],['مُحَمَّدٌ ٱلرَّسُولُ','muhammadun + ar-rasulu']]},
+ {h:'3. Ha kinoya va silah (vasl)'},
+ {p:'Waslda ha kinoya madd bilan ulanadi: بِهِۦ ← bihī، لَهُۥ ← lahū.'},
+ {h:'4. O\'qilmaydigan harflar (vaslda)'},
+ {list:['Hamzat wasl (ٱ).','Shamsiy harfdan oldingi lam (ٱلشَّمْسُ).','Jam\' vovidan keyingi alif (قَالُوا۟).','أَنَا۠ ning alifi (vaslda).']},
+ {h:'5. Vasl bilan vaqf farqi jadvali'},
+ {tbl:[['Vasl','Vaqf','Izoh'],
+  ['رَحْمَةٌ','رَحْمَهْ','ta marbuta → ha, tanvin tushadi'],
+  ['عَلِيمٌ','عَلِيمْ','tanvin damma → sokin'],
+  ['عَلِيمًا','عَلِيمَا','tanvin fatha → alif (madd iwad)'],
+  ['عَلِيمٍ','عَلِيمْ','tanvin kasra → sokin'],
+  ['بِهِۦ','بِهْ','silah tushadi'],
+  ['عَلَيْهِمُ','عَلَيْهِمْ','mim jam\' damma tushadi'],
+  ['ٱلرَّحِيمِ','ٱلرَّحِيمْ','harakat tushadi, madd arid'],
+  ['ٱلْفَلَقِ','ٱلْفَلَقْ','qalqala kubro'],
+  ['ٱلْحَقِّ','ٱلْحَقّْ','shadda saqlanadi, qalqala akbar'],
+  ['يَوْمَئِذٍ','يَوْمَئِذْ','tanvin kasra → sokin'],
+  ['لَنَسْفَعًا','لَنَسْفَعَا','nun ta\'kid → alif']]}
+]);
+
+add('vaqf','Vasl va Vaqf','Vaqf (to\'xtash) qoidalari',"Turlari, belgilari, usullari va o'zgarishlari",[
+ {h:'Ta\'riflar'},
+ {tbl:[['Atama','Ma\'nosi'],
+  ['Vaqf','So\'z oxirida <b>nafas olish niyati bilan</b> ovozni kesib to\'xtash'],
+  ['Vasl','Ikki so\'zni ulab o\'qish'],
+  ['Sakta','Nafas olmasdan <b>qisqa</b> to\'xtash (taxminan 2 harakat)'],
+  ['Qat\'','O\'qishni tugatish']]},
+ {h:'Vaqf turlari'},
+ {tbl:[['Turi','Tavsifi','Misol'],
+  ['Tom (to\'liq)','Lafz ham ma\'no ham tugagan; keyingi qism bog\'liq emas','Oyat oxiri: مَٰلِكِ يَوْمِ ٱلدِّينِ ۝'],
+  ['Kofiy','Lafz ajralgan, ma\'noda bog\'liqlik bor','خَتَمَ ٱللَّهُ عَلَىٰ قُلُوبِهِمْ — to\'xtash joiz'],
+  ['Hasan','Yaxshi, lekin keyingi qismdan <b>boshlash mumkin emas</b>','ٱلْحَمْدُ لِلَّهِ — to\'xtash mumkin, ammo «rabbil» dan boshlanmaydi'],
+  ['Qabih','Xunuk — ma\'noni buzadi, <b>mumkin emas</b>','لَا تَقْرَبُوا ٱلصَّلَوٰةَ | وَأَنتُمْ سُكَٰرَىٰ']]},
+ {note:'To\'xtash joiz bo\'lmagan joyda nafas tugab qolsa (iztiroriy vaqf) — keyin <b>to\'xtagan so\'zdan yoki undan oldingi mos joydan</b> qayta boshlanadi.'},
+ {h:'Vaqf belgilari (Madani mushaf)'},
+ {tbl:[['Belgi','Nomi','Ko\'rsatma'],
+  ['ۘ','Vaqf lazim (م)','To\'xtash <b>shart</b>, vasl ma\'noni o\'zgartiradi'],
+  ['ۙ','Laa (لا)','<b>To\'xtamang</b> (oyat oxirida bo\'lsa to\'xtash joiz, qayta o\'qimay davom eting)'],
+  ['ۖ','Sala (صلى)','Vasl <b>afzal</b>, to\'xtash ham joiz'],
+  ['ۗ','Qila (قلى)','Vaqf <b>afzal</b>'],
+  ['ۚ','Joiz (ج)','Vaqf ham, vasl ham teng'],
+  ['ۛ ... ۛ','Mu\'anaqa (∴)','Ikki joydan <b>bittasida</b> to\'xtang'],
+  ['ۜ','Sakta (س)','Nafas olmay qisqa to\'xtash'],
+  ['۝','Oyat oxiri','To\'xtash sunnat']]},
+ {tip:'Hind-Pokiston mushaflarida: ط (mutlaq), ز (mujavvaz), قف (vaqf), لا (to\'xtama) kabi belgilar ham uchraydi.'},
+ {h:'Vaqf usullari'},
+ {tbl:[['Usul','Qanday','Misol'],
+  ['Sukun (asliy)','Oxirgi harakatli harfni sokin qilish','ٱلْعَالَمِينَ → ٱلْعَالَمِينْ'],
+  ['Ro\'m','Harakatning ozgina qismini past ovoz bilan (kasra va damma da, fathada emas)','ٱلرَّحِيمِ'],
+  ['Ishmom','Sokin qilib, lablarni damma shaklida yumish (faqat dammada, ko\'rinadi, eshitilmaydi)','نَسْتَعِينُ']]},
+ {h:'Vaqfda bo\'ladigan o\'zgarishlar'},
+ {tbl:[['Holat','Natija','Misol'],
+  ['Tanvin damma/kasra','Sokin','عَلِيمٌ → عَلِيمْ'],
+  ['Tanvin fatha','Alif (madd iwad)','عَلِيمًا → عَلِيمَا'],
+  ['Ta marbuta','Ha sokin','رَحْمَةٌ → رَحْمَهْ'],
+  ['Ha kinoya','Silah tushadi','بِهِ → بِهْ'],
+  ['Mim jam\'','Sokin','عَلَيْهِمُ → عَلَيْهِمْ'],
+  ['Shaddali harf','Shadda saqlanadi','ٱلْحَقِّ → ٱلْحَقّْ'],
+  ['Qalqala harfi','Kubro/akbar','ٱلْفَلَقْ'],
+  ['أَنَا، لَٰكِنَّا','Alif o\'qiladi','أَنَا۠']]},
+ {note:'Ochiq yozilgan ta (رَحْمَتَ، نِعْمَتَ) — Hafs rivoyatida vaqfda <b>ta</b> bo\'lib qoladi, ha ga aylanmaydi.'},
+ {h:'Ibtido (boshlash)'},
+ {p:'To\'xtagandan keyin yangi jumlani <b>ma\'no tugagan joydan</b> boshlang. Hamzat wasl bilan boshlansa — harakati qoidaga ko\'ra beriladi.'}
+]);
+
+add('istisno','Istisnolar','Qur\'ondagi alohida istisnolar',"Hafs 'an Osim rivoyatidagi maxsus joylar",[
+ {h:'1. Saktat — 4 joyda'},
+ {tbl:[['Sura','Joy','Misol'],
+  ['Kahf 1','عِوَجَا ۜ قَيِّمًا','عِوَجَا ۜ'],
+  ['Yosin 52','مِن مَّرْقَدِنَا ۜ هَٰذَا','مَّرْقَدِنَا ۜ'],
+  ['Qiyama 27','وَقِيلَ مَنْ ۜ رَاقٍ','مَنْ ۜ'],
+  ['Mutaffifin 14','بَلْ ۜ رَانَ','بَلْ ۜ']]},
+ {h:'2. Ishmom — تَأْمَنَّا'},
+ {p:'Yusuf 11: مَا لَكَ لَا تَأْمَنَّا — nun ning idg\'omi paytida lablar <b>damma shaklida</b> yumiladi (ishmom), ovoz bilan emas.'},
+ {h:'3. Imola — مَجْرَىٰهَا'},
+ {p:'Hud 41: بِسْمِ ٱللَّهِ مَجْرَىٰهَا — fatha kasraga, alif yaga <b>moyil</b> qilib o\'qiladi (Hafs rivoyatida yagona joy).'},
+ {h:'4. Tashil — ءَاعْجَمِيٌّ'},
+ {p:'Fussilat 44: ءَاعْجَمِيٌّ — ikkinchi hamza hamza bilan alif orasida (<b>tashil</b>) o\'qiladi.'},
+ {h:'5. Madd farq'},
+ {p:'آلذَّكَرَيْنِ (Anʼom 143-144) va آللَّهُ (Yunus 59, Naml 59) — 6 harakat madd farq.'},
+ {h:'6. Izhor mutlaq'},
+ {ex:[['دُنْيَا','nun+ya'],['بُنْيَانٌ','nun+ya'],['صِنْوَانٌ','nun+vov'],['قِنْوَانٌ','nun+vov']]},
+ {h:'7. Silah istisnolari'},
+ {list:['فِيهِۦ مُهَانًا (Furqon 69) — sokindan keyin bo\'lsa ham silah bor.','أَرْجِهْ (Aʼrof 111, Shuaro 36) — silahsiz.','فَأَلْقِهْ (Naml 28) — silahsiz.','يَرْضَهُ لَكُمْ (Zumar 7) — silahsiz (damma).','يَأْتِهِ مُؤْمِنًا (Toha 75) — silahsiz.','يَتَّقْهِ (Nur 52) — silahsiz.','عَلَيْهُ ٱللَّهَ (Fath 10), أَنسَانِيهُ (Kahf 63) — ha da damma.']},
+ {h:'8. Ra istisnolari'},
+ {list:['فِرْقٍ (Shuaro 63) — tafxim va tarqiq ikkalasi joiz.','ٱلْمِصْرِ، ٱلْقِطْرِ (vaqf) — sokin isti\'lo harfi sababli tafxim.','قِرْطَاسٍ، فِرْقَةٍ، مِرْصَادًا — asliy kasradan keyin isti\'lo → tafxim.']},
+ {h:'9. Nun va ya/vov harf nomlarida izhor'},
+ {p:'يٰسٓ وَٱلْقُرْءَانِ، نٓ وَٱلْقَلَمِ — nun idg\'omsiz, aniq.'},
+ {h:'10. Mad lazim harfiy'},
+ {p:'Ayn (ع) da 4 yoki 6 harakat joiz; boshqa 7 harfda faqat 6.'},
+ {h:'11. Idg\'om naqis'},
+ {p:'أَحَطتُ، بَسَطتَ، فَرَّطتُ — ط ning itbaqi (qalinligi) ta ga singgandan keyin ham qoladi.'},
+ {h:'12. Lafzul-jalola'},
+ {p:'Kasradan keyin lom yupqa: بِٱللَّهِ، قُلِ ٱللَّهُمَّ.'},
+ {h:'13. Alif — faqat vaqfda o\'qiladigan'},
+ {p:'أَنَا۠، لَٰكِنَّا۠ — alif <b>faqat vaqfda</b>.'},
+ {h:'14. Kichik alif'},
+ {p:'ٱلصَّلَوٰةَ، ٱلزَّكَوٰةَ، ٱلْحَيَوٰةَ — yozilishda vov bor, o\'qilishda <b>alif</b>.'},
+ {tip:'Bu bo\'lim Hafs \'an Osim rivoyati bo\'yicha tuzilgan. Qiroat vajhlari (masalan Qolun, Varsh) farq qilishi mumkin — ustoz yo\'l-yo\'rig\'ini oling.'}
+]);
+
+/* ======= FLESH-KARTA (MASHQ) ======= */
+function flashPage(){
+ const h='<h2>Mashq: tasodifiy harf va harakat</h2><p class="sub">Bo\'sh joy (Space) — keyingi; «Javob» tugmasi — nomini ko\'rsatadi.</p><div class="card fc"><span class="ar" id="fcl">—</span><div class="ans" id="fca"></div><div><button onclick="fcNext()">Keyingi ▶</button><button onclick="fcShow()">Javob 👁</button><label style="margin:0 .5rem"><input type="checkbox" id="fcmix" checked> Harakat bilan</label></div></div>';
+ setTimeout(fcNext,0);return h;
+}
+let FC=null;
+function fcNext(){const i=Math.floor(Math.random()*28),l=L[i];const mix=document.getElementById('fcmix');
+ const hs=[['',''],[FATHA,'a'],[KASRA,'i'],[DAMMA,'u'],[FT,'an'],[KT,'in'],[DT,'un'],[SUK,'(sokin)']];
+ const k=(mix&&mix.checked)?hs[1+Math.floor(Math.random()*7)]:hs[0];
+ FC={l,k};document.getElementById('fcl').textContent=l.c+k[0];document.getElementById('fca').textContent='';}
+function fcShow(){if(!FC)return;document.getElementById('fca').textContent=FC.l.n+(FC.k[1]?' — '+FC.l.t+FC.k[1]:'');}
+
+/* ============ NAVIGATSIYA ============ */
+const TITLE={};PAGES.forEach(p=>TITLE[p.id]=p.t);
+const ORDER=[];
+L.forEach((l,i)=>ORDER.push({id:'h'+i,g:'Harflar (30 ta)',t:l.c+'  '+l.n,ar:l.c}));
+['belgilar','shakllar','hamza'].forEach(id=>{const p=PAGES.find(x=>x.id===id);ORDER.push({id,g:p.g,t:p.t})});
+['makhraj','sifat','nun','mim','lam','ra','tafxim','qalqala','madd','idgham'].forEach(id=>{const p=PAGES.find(x=>x.id===id);ORDER.push({id,g:p.g,t:p.t})});
+['hamzat-wasl','vasl','vaqf'].forEach(id=>{const p=PAGES.find(x=>x.id===id);ORDER.push({id,g:p.g,t:p.t})});
+ORDER.push({id:'istisno',g:'Istisnolar',t:PAGES.find(x=>x.id==='istisno').t});
+ORDER.push({id:'hayvon',g:'O\'yin',t:'🐾 Hayvonlar bog\'i'});
+ORDER.push({id:'oyin',g:'O\'yin',t:'🎮 O\'yin: harfni top!'});
+ORDER.push({id:'mashq',g:'Mashq',t:'Flesh-karta: tasodifiy harf'});
+TITLE['wasl']='Hamzat wasl';TITLE['vaqf']='Vaqf';TITLE['hamza']='Hamza';
+/* chip linklari uchun maxsus idlar */
+const ALIAS={'wasl':'hamzat-wasl','vaqf':'vaqf'};
+
+function buildSide(filter){
+ const f=(filter||'').toLowerCase();let h='<a onclick="go(\'home\')" id="a-home"><span class="ar">🏠</span> Bosh sahifa</a>';let g='';
+ ORDER.forEach(o=>{ if(f&&!(o.t.toLowerCase().includes(f)||o.g.toLowerCase().includes(f)))return;
+  if(o.g!==g){g=o.g;h+='<h4>'+g+'</h4>';}
+  h+='<a onclick="go(\''+o.id+'\')" id="a-'+o.id+'">'+(o.ar?'<span class="ar">'+o.ar+'</span>':'')+'<span>'+(o.ar?o.t.replace(o.ar,'').trim():o.t)+'</span>'+(/^h\d+$/.test(o.id)&&isL(+o.id.slice(1))?'<span style="margin-left:auto">⭐</span>':'')+'</a>';});
+ document.getElementById('side').innerHTML=h;
+ markOn();
+}
+function markOn(){document.querySelectorAll('#side a.on').forEach(a=>a.classList.remove('on'));const a=document.getElementById('a-'+CUR);if(a)a.classList.add('on');}
+
+let CUR='home';
+function go(id){id=ALIAS[id]||id;location.hash='#/'+id;}
+function render(){
+ let id=(location.hash.replace('#/','')||'home');
+ CUR=id;let h='';
+ const idx=ORDER.findIndex(o=>o.id===id);
+ if(id==='home'){h=home();}
+ else if(id==='mashq'){h=flashPage();}
+ else if(id==='oyin'){h=gamePage();}
+ else if(id==='hayvon'){h=zooPage();}
+ else if(/^h\d+$/.test(id)){h=letterPage(parseInt(id.slice(1)));}
+ else{const p=PAGES.find(x=>x.id===id);
+  if(p){h='<h2>'+p.t+'</h2><p class="sub">'+fmt(p.sub||'')+'</p>'+blocks(p.b);}
+  else{h='<h2>Topilmadi</h2>';}}
+ if(idx>=0){
+  h+='<div class="nav"><button '+(idx===0?'disabled':'')+' onclick="step(-1)">◀ Oldingi</button><button '+(idx===ORDER.length-1?'disabled':'')+' onclick="step(1)">Keyingi ▶</button></div>';
+ }
+ document.getElementById('main').innerHTML=h;
+ document.querySelectorAll('#main .ar').forEach(x=>x.classList.add('sp'));
+ if(/^h\d+$/.test(id)){document.querySelectorAll('#main .hk .cell .ar').forEach((x,j)=>x.dataset.aud=id+'-c'+j);document.querySelectorAll('#main .exi .ar').forEach((x,j)=>x.dataset.aud=id+'-w'+j);if(typeof markHas==='function')markHas();}
+ markOn();window.scrollTo(0,0);
+ document.getElementById('side').classList.remove('open');
+}
+function step(d){const idx=ORDER.findIndex(o=>o.id===CUR);const n=ORDER[idx+d];if(n)go(n.id);}
+
+function home(){
+ let h='<h2>Muallimi soniy — harflar va tajvid</h2><p class="sub">Har harf — alohida dars. Shriftni yuqoridagi <b>A+ / A−</b> tugmalari bilan kattalashtiring. Klaviatura: ← → — oldingi/keyingi dars.</p>';
+ {const n=L.slice(0,28).filter((x,i)=>isL(i)).length;h+='<div class="card"><b>⭐ Men '+n+' ta harfni o\'rgandim (28 tadan)</b><div class="pbar"><i style="width:'+Math.round(n/28*100)+'%"></i></div></div><p><a class="chip" onclick="go(\'oyin\')">🎮 O\'yin o\'ynash</a></p>';}
+ h+='<h3>Harflar (bosing — dars ochiladi)</h3><div class="lg">'+L.map((l,i)=>'<a onclick="go(\'h'+i+'\')"><span class="ar">'+l.c+'</span><small>'+l.n+'</small></a>').join('')+'</div>';
+ h+='<h3>Mavzular</h3><div class="chips">'+ORDER.filter(o=>!/^h\d+$/.test(o.id)).map(o=>'<a class="chip" onclick="go(\''+o.id+'\')">'+o.t+'</a>').join('')+'</div>';
+ h+=blocks([{tip:'Bu material o\'quvchi va o\'qituvchi uchun yordamchi vosita. Tajvid qoidalarini ustoz huzurida eshitib o\'rganing — tovushlarni faqat kitobdan o\'rganib bo\'lmaydi.'},
+ {p:'Qiroat: <b>Hafs \'an Osim</b>. Madd harakatlari: 2 / 4 / 6.'}]);
+ return h;
+}
+
+/* ============ SOZLAMALAR ============ */
+let SC=1;
+function setScale(v){SC=Math.max(.6,Math.min(2.2,v));document.documentElement.style.setProperty('--s',SC);try{localStorage.setItem('ms_scale',SC)}catch(e){}}
+document.getElementById('bp').onclick=()=>setScale(SC+.1);
+document.getElementById('bm').onclick=()=>setScale(SC-.1);
+document.getElementById('bd').onclick=()=>{document.documentElement.classList.remove('kid');document.documentElement.classList.toggle('dark');try{localStorage.setItem('ms_dark',document.documentElement.classList.contains('dark')?1:0)}catch(e){}};
+document.getElementById('bmenu').onclick=()=>document.getElementById('side').classList.toggle('open');
+document.getElementById('q').oninput=e=>buildSide(e.target.value);
+document.addEventListener('keydown',e=>{
+ if(e.target.tagName==='INPUT')return;
+ if(e.key==='ArrowRight')step(1);if(e.key==='ArrowLeft')step(-1);
+ if(CUR==='mashq'&&(e.key===' '||e.key==='Enter')){e.preventDefault();fcNext();}
+ if(CUR==='mashq'&&e.key==='a'){fcShow();}
+});
+window.addEventListener('hashchange',render);
+try{const s=parseFloat(localStorage.getItem('ms_scale'));if(s)SC=s;if(localStorage.getItem('ms_dark')==='1')document.documentElement.classList.add('dark');}catch(e){}
+
+/* ============ OVOZ ============ */
+let RATE=.6,VOICE=null;
+function pickVoice(){const v=(window.speechSynthesis&&speechSynthesis.getVoices())||[];VOICE=v.find(x=>/^ar/i.test(x.lang))||null;}
+if(window.speechSynthesis){pickVoice();speechSynthesis.onvoiceschanged=pickVoice;}
+
+/* IndexedDB: o'z yozuvlari */
+let DB=null;
+const dbReq=indexedDB.open('ms_audio',1);
+dbReq.onupgradeneeded=()=>dbReq.result.createObjectStore('a');
+dbReq.onsuccess=()=>{DB=dbReq.result;markHas();};
+const dbGet=k=>new Promise(r=>{if(!DB)return r(null);const q=DB.transaction('a').objectStore('a').get(k);q.onsuccess=()=>r(q.result||null);q.onerror=()=>r(null);});
+const dbPut=(k,v)=>new Promise(r=>{if(!DB)return r();const t=DB.transaction('a','readwrite');t.objectStore('a').put(v,k);t.oncomplete=r;});
+const dbKeys=()=>new Promise(r=>{if(!DB)return r([]);const q=DB.transaction('a').objectStore('a').getAllKeys();q.onsuccess=()=>r(q.result);q.onerror=()=>r([]);});
+async function markHas(){const ks=new Set(await dbKeys());document.querySelectorAll('#main [data-aud]').forEach(x=>x.classList.toggle('has',ks.has(x.dataset.aud)));}
+function tts(text){if(!window.speechSynthesis)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='ar-SA';if(VOICE)u.voice=VOICE;u.rate=RATE;speechSynthesis.speak(u);}
+async function play(text,aud){
+ text=text.replace(/[‍۟۠]/g,'').trim();
+ if(aud){const bl=await dbGet(aud);if(bl){new Audio(URL.createObjectURL(bl)).play();return;}
+  const a=new Audio('audio/'+aud+'.mp3');a.onerror=()=>tts(text);a.play().catch(()=>tts(text));return;}
+ tts(text);}
+let REC=false,MR=null,RECEL=null;
+async function recToggle(el){
+ if(MR&&MR.state==='recording'){MR.stop();return;}
+ if(!el.dataset.aud){alert('Bu joyga yozib bo\'lmaydi. Harf darsidagi harf, bo\'g\'in yoki so\'zni tanlang.');return;}
+ try{const st=await navigator.mediaDevices.getUserMedia({audio:true});
+  const ch=[];MR=new MediaRecorder(st);RECEL=el;el.classList.add('rec');
+  MR.ondataavailable=e=>ch.push(e.data);
+  MR.onstop=async()=>{st.getTracks().forEach(t=>t.stop());el.classList.remove('rec');await dbPut(el.dataset.aud,new Blob(ch,{type:MR.mimeType||'audio/webm'}));markHas();};
+  MR.start();}catch(err){alert('Mikrofonga ruxsat berilmadi: '+err.message);}
+}
+document.getElementById('main').addEventListener('click',e=>{
+ const el=e.target.closest('.ar');if(!el||el.closest('#side'))return;
+ const box=el.closest('.letter,.exi,.cell,.forms div,.fc,td,li,p,.lg a,.zs');if(!box)return;
+ if(REC){e.preventDefault();recToggle(el);return;}
+ play(el.dataset.say||el.textContent,el.dataset.aud);
+});
+document.getElementById('brec').onclick=function(){REC=!REC;this.classList.toggle('on',REC);this.textContent='🎙 yozish: '+(REC?'yoniq — harfni bosing, to\'xtatish uchun yana bosing':'o\'chiq');};
+const bsp=document.getElementById('bsp');
+bsp.onclick=()=>{RATE=RATE<.8?1:.6;bsp.textContent='🔊 '+(RATE<.8?'sekin':'tez');};
+const mo=new MutationObserver(()=>{});
+
+/* ============ BOLALAR UCHUN ============ */
+const bare=w=>w.replace(/[ً-ٰٟ]/g,'');
+const EMO={'أسد':'🦁','إبل':'🐪','أذن':'👂','باب':'🚪','بيت':'🏠','بقرة':'🐄','تفاح':'🍎','تمر':'🌴','تاج':'👑','ثور':'🐂','ثعلب':'🦊','ثوب':'👕','جمل':'🐫','جبل':'⛰️','جنة':'🌳','حصان':'🐴','حليب':'🥛','حجر':'🪨','خبز':'🍞','خروف':'🐑','خيمة':'⛺','دجاجة':'🐔','دب':'🐻','درس':'📚','ذهب':'🥇','ذرة':'🌽','ذئب':'🐺','رجل':'👨','رمان':'🔴','رأس':'🙂','زهرة':'🌸','زيت':'🫒','زجاج':'🪟','سمك':'🐟','سيف':'⚔️','سماء':'☁️','شمس':'☀️','شجرة':'🌳','شهر':'🌙','صقر':'🦅','صابون':'🧼','صورة':'🖼️','ضفدع':'🐸','ضيف':'🙋','ضوء':'💡','طير':'🐦','طاووس':'🦚','طفل':'👶','ظرف':'✉️','ظهر':'🕛','ظبي':'🦌','عين':'👁️','عنب':'🍇','عسل':'🍯','غراب':'🐦','غيم':'☁️','غزال':'🦌','فيل':'🐘','فأر':'🐭','فم':'👄','قلم':'✏️','قط':'🐱','قمر':'🌙','كتاب':'📖','كلب':'🐶','كرة':'⚽','ليمون':'🍋','لبن':'🥛','لسان':'👅','ماء':'💧','مسجد':'🕌','مفتاح':'🔑','نجم':'⭐','نهر':'🏞️','نار':'🔥','هلال':'🌙','هاتف':'📱','هدهد':'🐦','وردة':'🌹','ولد':'👦','وجه':'🙂','يد':'✋','يمامة':'🕊️','يوم':'☀️','سأل':'❓','مؤمن':'🤲','سئل':'❓','رحمة':'💗','صلاة':'🕌','كلام':'💬','لا':'🚫','لام':'🔤'};
+let LEARN=[];try{LEARN=JSON.parse(localStorage.getItem('ms_learn')||'[]')}catch(e){}
+const isL=i=>LEARN.includes(i);
+function burst(em){for(let i=0;i<16;i++){const s=document.createElement('span');s.className='cf';s.textContent=em||['🎉','⭐','✨','🌟'][i%4];s.style.left=(5+Math.random()*90)+'vw';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout(()=>s.remove(),2200);}}
+function beep(ok){try{const c=new (window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=ok?880:220;g.gain.value=.08;o.start();o.stop(c.currentTime+(ok?.18:.3));}catch(e){}}
+function toggleLearn(i){const k=LEARN.indexOf(i);if(k>=0)LEARN.splice(k,1);else{LEARN.push(i);burst();beep(true);}
+ try{localStorage.setItem('ms_learn',JSON.stringify(LEARN))}catch(e){}
+ const b=document.getElementById('lbtn');if(b){b.className='learn'+(isL(i)?' done':'');b.textContent=isL(i)?"⭐ O'rgandim!":"☆ Men bu harfni o'rgandim";}
+ buildSide(document.getElementById('q').value);}
+/* O'yin */
+let G={m:0,st:0,s:0,b:0,a:null,lock:false};try{G.b=+localStorage.getItem('ms_best')||0}catch(e){}
+function gamePage(){setTimeout(gNext,0);
+ return '<h2>🎮 O\'yin: harfni top!</h2><p class="sub">To\'g\'ri javob — yulduzcha ⭐. Ketma-ket 5 ta topsang — katta mukofot 🏆</p><div class="card"><div class="chips"><a class="chip" onclick="gMode(0)">1. Harf → nomi</a><a class="chip" onclick="gMode(1)">2. Nomi → harf</a><a class="chip" onclick="gMode(2)">3. Rasm → qaysi harf?</a></div><div class="gscore">⭐ <b id="gs">0</b> &nbsp; 🔥 ketma-ket: <b id="gst">0</b> &nbsp; 🏆 eng yaxshi: <b id="gb">0</b></div><div id="gq" class="gq"></div><div id="gch" class="gch"></div><div id="gmsg" class="gmsg"></div></div>';}
+function gMode(m){G.m=m;G.st=0;gNext();}
+function gNext(){const q=document.getElementById('gq');if(!q)return;G.lock=false;
+ const ci=Math.floor(Math.random()*28),idx=[ci];while(idx.length<4){const r=Math.floor(Math.random()*28);if(!idx.includes(r))idx.push(r);}
+ idx.sort(()=>Math.random()-.5);G.a=ci;const l=L[ci];let qh,ch;
+ if(G.m===0){qh='<span class="ar gbig">'+l.c+'</span><div>Bu qaysi harf?</div>';ch=idx.map(i=>'<button onclick="gAns(this,'+i+')">'+L[i].n+'</button>').join('');}
+ else if(G.m===1){qh='<div class="gname">'+l.n+'</div><div>Qaysi harf?</div>';ch=idx.map(i=>'<button class="ar" onclick="gAns(this,'+i+')">'+L[i].c+'</button>').join('');}
+ else{const w=l.w[0];qh='<div class="gemo">'+(EMO[bare(w[0])]||'❓')+'</div><div>'+w[1]+' — qaysi harfdan boshlanadi?</div>';ch=idx.map(i=>'<button class="ar" onclick="gAns(this,'+i+')">'+L[i].c+'</button>').join('');}
+ q.innerHTML=qh;document.getElementById('gch').innerHTML=ch;document.getElementById('gmsg').textContent='';
+ document.getElementById('gs').textContent=G.s;document.getElementById('gst').textContent=G.st;document.getElementById('gb').textContent=G.b;}
+function gAns(b,i){if(G.lock)return;const msg=document.getElementById('gmsg');
+ if(i===G.a){G.lock=true;G.s++;G.st++;if(G.st>G.b){G.b=G.st;try{localStorage.setItem('ms_best',G.b)}catch(e){}}
+  b.classList.add('good');beep(true);
+  const pr=['Barakalla! 🎉','Zo\'r! ⭐','Juda yaxshi! 👏','Ofarin! 🌟','Super! 🚀'];msg.textContent=G.st%5===0?'🏆 Ajoyib! '+G.st+' ta ketma-ket!':pr[Math.floor(Math.random()*pr.length)];
+  burst(G.st%5===0?'🏆':null);document.getElementById('gs').textContent=G.s;document.getElementById('gst').textContent=G.st;document.getElementById('gb').textContent=G.b;
+  setTimeout(gNext,1300);}
+ else{G.st=0;beep(false);b.classList.add('bad');b.disabled=true;msg.textContent='Yana urinib ko\'r 💪';document.getElementById('gst').textContent=0;}}
+document.getElementById('bk').onclick=()=>{document.documentElement.classList.remove('dark');document.documentElement.classList.toggle('kid');try{localStorage.setItem('ms_kid',document.documentElement.classList.contains('kid')?1:0)}catch(e){}};
+try{if(localStorage.getItem('ms_kid')==='1'){document.documentElement.classList.remove('dark');document.documentElement.classList.add('kid');}}catch(e){}
+
+/* ============ HAYVONLAR BOG'I ============ */
+const ZOO=[['أَسَد','sher','🦁'],['بَقَرَة','sigir','🐄'],['تِمْسَاح','timsoh','🐊'],['ثَعْلَب','tulki','🦊'],['جَمَل','tuya','🐫'],['حِصَان','ot','🐴'],['خُفَّاش','ko\'rshapalak','🦇'],['دُبّ','ayiq','🐻'],['ذِئْب','bo\'ri','🐺'],['رَنْجَة','seld baliq','🐟'],['زَرَافَة','jirafa','🦒'],['سَمَكَة','baliq','🐠'],['شَاة','qo\'y','🐑'],['صَقْر','lochin','🦅'],['ضِفْدَع','baqa','🐸'],['طَاوُوس','tovus','🦚'],['ظَبْي','kiyik','🦌'],['عُصْفُور','chumchuq','🐤'],['غُرَاب','qarg\'a','🐦'],['فِيل','fil','🐘'],['قِرْد','maymun','🐒'],['كَلْب','it','🐶'],['لَقْلَق','laylak','🦢'],['مَاعِز','echki','🐐'],['نَمْلَة','chumoli','🐜'],['هِرَّة','mushuk','🐱'],['وَزَّة','g\'oz','🦆'],['يَمَامَة','kaptar','🕊️']];
+let Z=[];try{Z=JSON.parse(localStorage.getItem('ms_zoo')||'[]')}catch(e){}
+let ZA=null,ZLOCK=false;
+function zooPage(){setTimeout(()=>{zGrid();zNext();},0);
+ return '<h2>🐾 Hayvonlar bog\'i</h2><p class="sub">Hayvonchaning nomi qaysi harfdan boshlanadi? To\'g\'ri topsang, hayvonchani o\'z uyiga qo\'yamiz! Uyga bossang, nomini o\'qib beradi.</p><div class="card"><div id="zq" class="gq"></div><div id="zch" class="gch"></div><div id="zmsg" class="gmsg"></div></div><h3>Hayvonlar uylari (<span id="zc">0</span>/28)</h3><div id="zgrid" class="zg"></div><p><a class="chip" onclick="zReset()">🔄 Boshidan boshlash</a></p>';}
+function zGrid(newI){const g=document.getElementById('zgrid');if(!g)return;
+ g.innerHTML=L.slice(0,28).map((l,i)=>{const a=ZOO[i],on=Z.includes(i);
+  return '<div class="zs'+(on?' on':'')+(i===newI?' new':'')+'"><span class="ar zl">'+l.c+'</span>'+(on?'<div class="ze">'+a[2]+'</div><span class="ar zw">'+a[0]+'</span><small>'+a[1]+'</small>':'<div class="ze">🏠</div><small>bo\'sh</small>')+'</div>';}).join('');
+ const c=document.getElementById('zc');if(c)c.textContent=Z.length;}
+function zNext(){const q=document.getElementById('zq');if(!q)return;ZLOCK=false;
+ const rest=[...Array(28).keys()].filter(i=>!Z.includes(i));
+ if(!rest.length){q.innerHTML='<div class="gemo">🏆</div><div>Barakalla! Hamma hayvonchalar o\'z uyida!</div>';document.getElementById('zch').innerHTML='';burst('🐾');return;}
+ const ci=rest[Math.floor(Math.random()*rest.length)],idx=[ci];while(idx.length<4){const r=Math.floor(Math.random()*28);if(!idx.includes(r))idx.push(r);}
+ idx.sort(()=>Math.random()-.5);ZA=ci;const a=ZOO[ci];
+ q.innerHTML='<div class="gemo">'+a[2]+'</div><span class="ar" style="display:block;font-size:calc(4rem*var(--s))">'+a[0]+'</span><div>'+a[1]+' — qaysi harfdan boshlanadi?</div>';
+ document.getElementById('zch').innerHTML=idx.map(i=>'<button class="ar" onclick="zAns(this,'+i+')">'+L[i].c+'</button>').join('');
+ document.getElementById('zmsg').textContent='';}
+function zAns(b,i){if(ZLOCK)return;const m=document.getElementById('zmsg');
+ if(i===ZA){ZLOCK=true;Z.push(ZA);try{localStorage.setItem('ms_zoo',JSON.stringify(Z))}catch(e){}
+  b.classList.add('good');beep(true);burst(ZOO[ZA][2]);m.textContent='Barakalla! '+ZOO[ZA][1]+' o\'z uyiga kirdi 🏠';zGrid(ZA);setTimeout(zNext,1500);}
+ else{beep(false);b.classList.add('bad');b.disabled=true;m.textContent='Yana urinib ko\'r 💪';}}
+function zReset(){if(!confirm('Hamma hayvonlar uylaridan chiqarilsinmi?'))return;Z=[];try{localStorage.setItem('ms_zoo','[]')}catch(e){}zGrid();zNext();}
+setScale(SC);buildSide();render();
+</script>
+</body>
+</html>
